@@ -1,7 +1,6 @@
 package Interfaces;
 
 import java.util.Iterator;
-
 import Classes.Node;
 
 public interface ArvoreGenerica {
