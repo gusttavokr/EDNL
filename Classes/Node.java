@@ -53,7 +53,11 @@ public class Node{
         this.filhoD = filhoD;
     }
 
-    public void adiconar_filho(Node novo_filho){
+    public void adicionar_filho(Node novo_filho){
         filhos.add(novo_filho);
+    }
+
+    public void remover_filho(Node filho){
+        filhos.remove(filho);
     }
 }
