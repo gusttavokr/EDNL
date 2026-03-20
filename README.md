@@ -20,7 +20,7 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 
 ## ✅ Checklist de Implementação
 
-### 🌲 Estruturas Não-Lineares
+### 🌲 [Árvores](https://github.com/gusttavokr/ednl/tree/arvore)
 - [x] **Árvore Genérica**
 - [ ] **Árvore Binária**
 - [ ] **Árvore de Pesquisa (BST)**
