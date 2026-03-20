@@ -6,22 +6,22 @@ import Classes.Node;
 public interface TAD_ArvoreGenerica {
 
     // Métodos genéricos
-    public int size(); //feito
-    public int height(Node n); //feito
-    public boolean isEmpty(); //feito
-    public Iterator<Object> elements(); //feito
-    public Iterator<Node> nodes();  //feito
+    public int size(); 
+    public int height(Node n); 
+    public boolean isEmpty(); 
+    public Iterator<Object> elements(); 
+    public Iterator<Node> nodes();  
 
     // Métodos de acesso
-    public Node root(); //feito
-    public Node parent(Node n); //feito
-    public Iterator<Node> children(Node n); //feito
+    public Node root(); 
+    public Node parent(Node n); 
+    public Iterator<Node> children(Node n); 
 
     // Métodos de consulta
-    public boolean isExternal(Node n); //feito
-    public boolean isInternal(Node n); //feito
-    public boolean isRoot(Node n); //feito
-    public int depth(Node n); //feito
+    public boolean isExternal(Node n); 
+    public boolean isInternal(Node n); 
+    public boolean isRoot(Node n); 
+    public int depth(Node n); 
 
     // Método de atualização
     public Object replace(Node n, Object o);
