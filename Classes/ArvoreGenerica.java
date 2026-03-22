@@ -25,10 +25,16 @@ public class ArvoreGenerica implements TAD_ArvoreGenerica {
     }
 
     public Node root(){
+        if (isEmpty()) {
+            throw new ArvoreVazia("arvore vazia");
+        }
         return this.raiz;
     }
 
     public Node parent(Node n){
+        if (isEmpty()) {
+            throw new ArvoreVazia("arvore vazia");
+        }
         return n.get_pai();
     }
 
