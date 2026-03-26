@@ -1,5 +1,8 @@
 package Classes;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import Exceptions.ArvoreVazia;
 import Exceptions.NodeSemFilho;
 import Interfaces.TAD_ArvoreBinaria;
@@ -82,16 +85,14 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
             throw new ArvoreVazia("A árvore está vazia");
         }
 
-        return (n.get_filhoE() == null && n.get_filhoD() == null);
+        return (!hasLeft(n) && !hasRight(n));
     }
-
     @Override
     public boolean isInternal(Node n){
         if (isEmpty()) {
             throw new ArvoreVazia("A árvore está vazia");
         }
-
-        return (n.get_filhoE() != null || n.get_filhoD() != null);
+        return (hasLeft(n) || hasRight(n));
     }
 
     public Object remove(Node n){
@@ -163,5 +164,39 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
 
         tamanho--;
         return n.get_element();
+    }
+    
+    @Override
+    public int height(Node n){
+        if (isEmpty()) {
+            throw new ArvoreVazia("Árvore vazia");
+        }
+
+        if (isExternal(n)) {
+            return 0;
+        } 
+        int h = 0;
+        
+        if (hasLeft(n)) {
+            h = Math.max(h, height(leftChild(n)));
+        }
+        if (hasRight(n)) {
+            h = Math.max(h, height(rightChild(n)));
+        }
+        return 1+h;
+    }
+
+    @Override
+    public Iterator<Node> children (Node n){
+        ArrayList<Node> array = new ArrayList<>();
+
+        if (hasLeft(n)) {
+            array.add(leftChild(n));
+        }
+
+        if(hasRight(n)){
+            array.add(rightChild(n));
+        }
+        return array.iterator();
     }
 }
