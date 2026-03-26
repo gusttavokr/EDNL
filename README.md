@@ -23,7 +23,7 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 
 ### 🌲 [Árvores](https://github.com/gusttavokr/ednl/tree/arvore)
 - [x] **Árvore Genérica**
-- [ ] **Árvore Binária**
+- [x] **Árvore Binária**
 - [ ] **Árvore de Pesquisa (BST)**
 - [ ] **Árvore AVL**
 - [ ] **Árvore Rubro-Negra**
