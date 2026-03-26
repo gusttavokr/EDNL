@@ -14,16 +14,10 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
     }
 
     public boolean hasLeft(Node n){
-        if (n.get_filhoE() == null) {
-            throw new NodeSemFilho("O nó não tem filho esquerdo");
-        }
-        return n.get_filhoE() != null;
+        return leftChild(n) != null;
     }
     public boolean hasRight(Node n){
-        if (n.get_filhoD() == null) {
-            throw new NodeSemFilho("O nó não tem filho direito");
-        }
-        return n.get_filhoD() != null;
+        return rightChild(n) != null;
     }
 
     public Node leftChild(Node n){
@@ -43,10 +37,11 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
         if (isEmpty()) {
             throw new ArvoreVazia("A árvore está vazia");
         }
-
+        
         if (hasLeft(n)) {
-            throw new NodeSemFilho("O nó já tem um filho esquerdo");
-        }
+            throw new NodeSemFilho("O nó já tem filho");
+        } 
+
         Node node = new Node(o);
         n.set_filhoE(node);
         node.set_pai(n);
@@ -102,7 +97,7 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
         Node pai = parent(n);
         Node filhoE = leftChild(n);
         Node filhoD = rightChild(n);
-
+        
         // Remoção de nó com dois filhos.
         if (filhoE != null && filhoD != null) {
             if (isRoot(n)) {
@@ -139,12 +134,12 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
             }
             filho.set_pai(null);
         } else{
-            if (leftChild(pai) == n) {
+            
+            if (leftChild(pai) == n) {                
                 pai.set_filhoE(filho);
             } else if (rightChild(pai) == n){
                 pai.set_filhoD(filho);
             }
-
             if (filho != null) {
                 filho.set_pai(pai);
             }
@@ -153,15 +148,16 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
 
         // Caso o nó seja externo
         if (isExternal(n) || isExternal(n) && isRoot(n)){
+            
             if (leftChild(pai) == n) {
                 pai.set_filhoE(null);
                 n.set_pai(null);
-            } else {
+            } 
+            if (rightChild(pai) == n) {
                 pai.set_filhoD(null);
                 n.set_pai(null);
-            }
+            } 
         }
-
         tamanho--;
         return n.get_element();
     }
