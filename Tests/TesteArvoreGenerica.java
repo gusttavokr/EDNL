@@ -3,7 +3,7 @@ package Tests;
 import Classes.ArvoreGenerica;
 import Classes.Node;
 
-public class ArvoreG {
+public class TesteArvoreGenerica {
     public static void main(String[] args) {
         System.out.println("Testes para a Arvore Binaria");
 
