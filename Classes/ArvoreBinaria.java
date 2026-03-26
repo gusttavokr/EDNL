@@ -239,4 +239,29 @@ public class ArvoreBinaria extends ArvoreGenerica implements TAD_ArvoreBinaria {
         }
 
     }
+
+    @Override
+    public void preOrder(Node n, ArrayList<Object> array){
+        array.add(n.get_element());
+
+        if (hasLeft(n)) {
+            preOrder(leftChild(n), array);
+        }
+        
+        if (hasRight(n)) {
+            preOrder(rightChild(n), array);
+        }
+    }
+
+    @Override
+    public void postOrder(Node n, ArrayList<Node> array){
+        if (hasLeft(n)) {
+            postOrder(leftChild(n), array);
+        }
+        if (hasRight(n)) {
+            postOrder(rightChild(n), array);
+        }
+
+        array.add(n);
+    }
 }
