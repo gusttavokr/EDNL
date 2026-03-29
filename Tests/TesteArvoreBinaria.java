@@ -14,7 +14,7 @@ public class TesteArvoreBinaria {
         arvore.insertRight("3", raiz);
 
         Node filho1 = arvore.leftChild(raiz);
-        Node filho2 = arvore.rightChild(raiz);
+        // Node filho2 = arvore.rightChild(raiz);
 
         arvore.printArvore();
 
