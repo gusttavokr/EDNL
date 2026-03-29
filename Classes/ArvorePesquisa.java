@@ -1,5 +1,7 @@
 package Classes;
 
+import Exceptions.NodeEncontrado;
+
 public class ArvorePesquisa extends ArvoreBinaria {
     public ArvorePesquisa(Object o){
         super(o);
@@ -48,5 +50,42 @@ public class ArvorePesquisa extends ArvoreBinaria {
         }
         
         return 0;
+    }
+
+    public Node insert(Object o){
+
+            if (isEmpty()) {
+                insertRoot(o);
+                return root();
+            }
+
+            Node raiz = root();
+            if ((busca(o, raiz)) != null) {
+                throw new NodeEncontrado ("Elemento presente na árvore");
+            }
+
+            Node temp = raiz;
+            Node filho = null;
+
+            while (!isExternal(temp)) {
+                if (comparar(o, temp.get_element()) < 0) {
+                    temp = leftChild(temp);
+                }
+                else if (comparar(o, temp.get_element()) > 0) {
+                    temp = rightChild(temp);
+                }
+            }
+
+            if (comparar(o, temp.get_element()) < 0) {
+                insertLeft(o, temp);
+                filho = leftChild(temp);
+            }
+
+            else if (comparar(o, temp.get_element()) > 0) {
+                insertRight(o, temp);
+                filho = rightChild(temp);
+            }
+
+            return filho;
     }
 }
