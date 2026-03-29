@@ -8,10 +8,7 @@ public class ArvorePesquisa extends ArvoreBinaria {
     }
 
     public Node busca(Object o, Node n){
-        if (isExternal(n)) {
-            return n;
-        }
-
+        
         if (comparar(o, n.get_element()) < 0) {
             return busca(o, leftChild(n));
         }
@@ -60,6 +57,7 @@ public class ArvorePesquisa extends ArvoreBinaria {
             }
 
             Node raiz = root();
+
             if ((busca(o, raiz)) != null) {
                 throw new NodeEncontrado ("Elemento presente na árvore");
             }
