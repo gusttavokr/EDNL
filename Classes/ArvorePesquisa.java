@@ -80,51 +80,51 @@ public class ArvorePesquisa extends ArvoreBinaria {
         return n;
     }
 
-    // public Node insert(Object o){
+    public Node insert2(Object o){
 
-    //         if (isEmpty()) {
-    //             insertRoot(o);
-    //             return root();
-    //         }
+            if (isEmpty()) {
+                insertRoot(o);
+                return root();
+            }
 
-    //         Node raiz = root();
+            Node raiz = root();
 
-    //         if ((comparar(o, raiz)) == 0) {
-    //             throw new PosicaoInvalida ("Elemento presente na árvore");
-    //         }
+            if ((comparar(o, raiz)) == 0) {
+                throw new PosicaoInvalida ("Elemento presente na árvore");
+            }
 
-    //         Node temp = raiz;
-    //         Node filho = null;
+            Node temp = raiz;
+            Node filho = null;
 
-    //         while (!isExternal(temp)) {
-    //             if (comparar(temp.get_element(), o) < 0) {
-    //                 if (!hasLeft(temp)) {
-    //                     break;
-    //                 } else{
-    //                     temp = leftChild(temp);
-    //                 }
-    //             }
-    //             else if (comparar(temp.get_element(), o) > 0) {
-    //                 if (!hasRight(temp)) {
-    //                     break;
-    //                 } else{
-    //                     temp = rightChild(temp);
-    //                 }
-    //             }
-    //         }
+            while (!isExternal(temp)) {
+                if (comparar(o, temp.get_element()) < 0) {
+                    if (!hasLeft(temp)) {
+                        break;
+                    } else{
+                        temp = leftChild(temp);
+                    }
+                }
+                else if (comparar(o, temp.get_element()) > 0) {
+                    if (!hasRight(temp)) {
+                        break;
+                    } else{
+                        temp = rightChild(temp);
+                    }
+                }
+            }
 
-    //         if (comparar(temp.get_element(), o) > 0) {
-    //             System.out.println("Inserindo o: " + o + " em filho direito");
-    //             insertLeft(o, temp);
-    //             filho = leftChild(temp);
-    //         }
+            if (comparar(o, temp.get_element()) > 0) {
+                System.out.println("Inserindo o: " + o + " em filho direito");
+                insertRight(o, temp);
+                filho = rightChild(temp);
+            }
             
-    //         else if (comparar(temp.get_element(), o) < 0) {
-    //             System.out.println("Inserindo o: " + o + " em filho esquerdo");
-    //             insertRight(o, temp);
-    //             filho = rightChild(temp);
-    //         }
+            else if (comparar(o, temp.get_element()) < 0) {
+                System.out.println("Inserindo o: " + o + " em filho esquerdo");
+                insertLeft(o, temp);
+                filho = leftChild(temp);
+            }
 
-    //         return filho;
-    // }
+            return filho;
+    }
 }
