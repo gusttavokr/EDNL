@@ -13,6 +13,7 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 │   ├── interfaces/     # Contratos e assinaturas dos métodos das estruturas
 │   ├── classes/        # Implementações concretas das árvores e nós
 │   └── exceptions/     # Exceções personalizadas para operações inválidas
+│   └── tests/          # Scripts de teste para os métodos das estruturas
 └── README.md
 ```
 
@@ -22,7 +23,7 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 
 ### 🌲 [Árvores](https://github.com/gusttavokr/ednl/tree/arvore)
 - [x] **Árvore Genérica**
-- [ ] **Árvore Binária**
+- [x] **Árvore Binária**
 - [ ] **Árvore de Pesquisa (BST)**
 - [ ] **Árvore AVL**
 - [ ] **Árvore Rubro-Negra**
