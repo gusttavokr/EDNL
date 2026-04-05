@@ -1,5 +1,6 @@
 package Classes;
 
+import Exceptions.ArvoreVazia;
 import Exceptions.PosicaoInvalida;
 
 public class ArvorePesquisa extends ArvoreBinaria {
@@ -126,5 +127,74 @@ public class ArvorePesquisa extends ArvoreBinaria {
             }
 
             return filho;
+    }
+
+    public Object remove(Node n){
+        if (isEmpty()) {
+            throw new ArvoreVazia("A árvore está vazia brow");
+        }
+
+        Object element = n.get_element();
+        
+        Node pai = parent(n);
+        Node filho;
+
+        if (isExternal(n)) {
+            if (isRoot(n)){
+                System.out.println("Cheguei aqui");
+                raiz = null;
+                tamanho = 0;
+            }
+            else if (leftChild(pai) == n) {
+                pai.set_filhoE(null);
+                tamanho--;
+            }
+            else if (rightChild(pai) == n){
+                pai.set_filhoD(null);
+                tamanho--;
+            }
+            return element;
+        }
+
+        if (hasLeft(n) && hasRight(n)) {
+            filho = rightChild(n);
+            
+            while (leftChild(filho) != null) {
+                filho = leftChild(filho);
+            }
+            
+            Object elementoFilho = filho.get_element();
+            replace(n, elementoFilho);
+            remove(filho);
+            
+            return element;
+        }
+        else if (hasLeft(n) && !hasRight(n)) {
+            filho = leftChild(n);
+            if (isRoot(n)){
+                filho.set_pai(null);
+                raiz = filho;
+                tamanho--;
+                return element;
+            }
+            else if (leftChild(pai) == n) {
+                pai.set_filhoE(filho);
+            } else if (rightChild(pai) == n){
+                pai.set_filhoD(filho);
+            }
+            filho.set_pai(pai);
+        } else if(!hasLeft(n) && hasRight(n)){
+            filho = rightChild(n);
+            if (leftChild(pai) == n) {
+                pai.set_filhoE(filho);
+            } else if(rightChild(pai) == n){
+                pai.set_filhoD(filho);
+            }
+            filho.set_pai(pai);
+        }
+
+        tamanho--;
+        return element;
+
     }
 }
