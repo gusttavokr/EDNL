@@ -70,11 +70,9 @@ public class ArvorePesquisa extends ArvoreBinaria {
 
         if (comparar(pai.get_element(), o) > 0) {
             pai.set_filhoE(n);
-            n.set_pai(pai);
         }
         else if (comparar(pai.get_element(), o) < 0){
             pai.set_filhoD(n);
-            n.set_pai(pai);
         }
 
         tamanho++;
