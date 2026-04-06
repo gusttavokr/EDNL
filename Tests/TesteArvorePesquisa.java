@@ -5,7 +5,7 @@ import Classes.Node;
 
 public class TesteArvorePesquisa {
     public static void main(String[] args) {
-        System.out.println("Testes para a Arvore Binaria");
+        System.out.println("Testes para a Arvore de Pesquisa");
 
         ArvorePesquisa arvore = new ArvorePesquisa(6);
         
