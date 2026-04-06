@@ -15,6 +15,7 @@ public class Node{
     public Node(Object o){
         this.element = o;
         this.filhos = new ArrayList<>();
+        this.FB = 0;
     }
 
     // Métodos get
