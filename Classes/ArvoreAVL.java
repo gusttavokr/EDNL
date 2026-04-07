@@ -2,8 +2,6 @@ package Classes;
 
 import Exceptions.PosicaoInvalida;
 
-import java.awt.*;
-
 public class ArvoreAVL extends ArvorePesquisa {
     public ArvoreAVL(Object o){
         super(o);
@@ -20,41 +18,78 @@ public class ArvoreAVL extends ArvorePesquisa {
         Node n = new Node(o);
         n.set_pai(pai);
 
-        if (comparar(pai.get_element(), o) > 0){
+        if (comparar(o, pai.get_element()) < 0) {
             pai.set_filhoE(n);
-
-            // Atualizar Fator de Balanceamento
-            while (pai.get_FB() == 0){
-                int fb = pai.get_FB() + 1;
-                pai.set_FB(fb);
-
-                System.out.println("Pai atual: " + pai.get_element() + " [" + pai.get_FB() + "]");
-
-                if (isRoot(pai)){
-                    break;
-                }
-                pai = pai.get_pai();
-            }
+            atualizarFB(n, pai);
         }
-        else if (comparar(pai.get_element(), o) < 0){
+        else if (comparar(o, pai.get_element()) > 0) {
             pai.set_filhoD(n);
-
-            // Atualizar Fator de Balanceamento
-            while (pai.get_FB() == 0){
-                int fb = pai.get_FB() -1;
-                pai.set_FB(fb);
-
-                System.out.println("Pai atual: " + pai.get_element() + " [" + pai.get_FB() + "]");
-
-                if (isRoot(pai)){
-                    break;
-                }
-                pai = pai.get_pai();
-            }
+            atualizarFB(n, pai);
         }
+
+        // if (comparar(o, pai.get_element()) < 0){
+        //     pai.set_filhoE(n);
+
+        //     // Atualizar Fator de Balanceamento
+        //     Node temp = pai;
+        //     while (temp.get_FB() < 2){
+        //         int fb = temp.get_FB() + 1;
+        //         temp.set_FB(fb);
+                
+
+        //         if (isRoot(temp)){
+        //             break;
+        //         }
+
+        //         if (temp.get_FB() == 1 || temp.get_FB() == -1) {
+        //             temp = temp.get_pai();
+        //         }
+
+        //         else if (temp.get_FB() == 2 || temp.get_FB() == -2){
+        //             System.out.println("A árvore ta desbalanceada nessa porra");
+        //             break;
+        //         }
+        //     }
+        // }
+        // else if (comparar(o, pai.get_element()) > 0){
+        //     pai.set_filhoD(n);
+            
+        //     // Atualizar Fator de Balanceamento
+        //     Node temp = pai;
+        //     while (temp.get_FB() > 2){
+        //         int fb = temp.get_FB() - 1;
+        //         temp.set_FB(fb);
+
+
+        //         if (isRoot(temp) || temp.get_FB() == 0){
+        //             break;
+        //         }
+
+        //         if (temp.get_FB() == 1 || temp.get_FB() == -1) {
+        //             temp = temp.get_pai();
+        //         }
+
+        //         else if (temp.get_FB() == 2 || temp.get_FB() == -2){
+        //             System.out.println("A árvore ta desbalanceada nessa porra");
+        //             break;
+        //         }
+        //     }
+        // }
 
         tamanho++;
         return n;
+    }
+
+    public void atualizarFB(Node n, Node p){
+        while (p != null) {
+            if (comparar(n.get_element(), p.get_element()) < 0) {
+                p.set_FB(p.get_FB()+1);
+                p = p.get_pai();
+            } else if (comparar(n.get_element(), p.get_element()) > 0) {
+                p.set_FB(p.get_FB()-1);
+                p = p.get_pai();
+            }
+        }
     }
 
     public void inOrder(Node n, String[][] matriz, int colunaAtual[]){
@@ -90,7 +125,7 @@ public class ArvoreAVL extends ArvorePesquisa {
 
         for(int i = 0; i < linhas; i++){
             for (int j = 0; j < colunas; j++){
-                System.out.print(matriz[i][j] + " ");
+                System.out.printf("%-5s", matriz[i][j]);
             }
             System.out.println();
         }
