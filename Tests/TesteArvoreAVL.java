@@ -1,6 +1,7 @@
 package Tests;
 
 import Classes.ArvoreAVL;
+import Classes.Node;
 
 public class TesteArvoreAVL {
     public static void main(String[] args) {
@@ -24,6 +25,19 @@ public class TesteArvoreAVL {
         System.out.println("Inserindo o: 6");
         arvore.insercaoAVL(6);
         arvore.printArvore();
+
+        System.out.println("Inserindo o: 7");
+        arvore.insercaoAVL(7);
+        arvore.printArvore();
+
+        Node raiz = arvore.root();
+
+        Node cinco = arvore.busca(5, raiz);
+        Node tres = arvore.busca(3, raiz);
+
+        System.out.println("O filho esquerdo de: " + cinco.get_element() + " é: " + (cinco.get_filhoE()).get_element());
+
+        System.out.println("O pai de 3 é " + (tres.get_pai()).get_element());
 //
 //        System.out.println("Inserindo o: 6");
 //        arvore.insercaoAVL(6);
