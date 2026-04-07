@@ -40,7 +40,13 @@ public class ArvoreAVL extends ArvorePesquisa {
         while (p != null) {
             if (comparar(n.get_element(), p.get_element()) < 0) {
                 p.set_FB(p.get_FB()+1);
+
+                if (p.get_FB() > 1){
+                    desbalanceado = p;
+                }
+
                 p = p.get_pai();
+
             } else if (comparar(n.get_element(), p.get_element()) > 0) {
                 p.set_FB(p.get_FB()-1);
 
@@ -60,22 +66,46 @@ public class ArvoreAVL extends ArvorePesquisa {
     public void rotacao(Node n){
 
         System.out.println("Rotacionando: " + n.get_element() + " [" + n.get_FB() + "]");
+        Node filhoD = n.get_filhoD();
+        Node filhoE = n.get_filhoE();
 
-        Node sucessor = n.get_filhoD();
-        Node beta = sucessor.get_filhoE();
         Node oldPai = n.get_pai();
 
-        sucessor.set_pai(oldPai);
-        if (n == raiz){
-            raiz = sucessor;
+        if (n.get_FB() == 2){
+            // Rotação Direita
+            Node antecessor = filhoE.get_filhoD();
+
+            filhoE.set_pai(oldPai);
+
+            if (isRoot(n)){
+                raiz = filhoE;
+            }
+
+            filhoE.set_filhoD(n);
+            n.set_filhoE(antecessor);
+            n.set_pai(filhoE);
+
+            n.set_FB(n.get_FB() - 1 - Math.max(filhoE.get_FB(), 0));
+            filhoE.set_FB(filhoE.get_FB() - 1 + Math.min(n.get_FB(), 0));
         }
 
-        sucessor.set_filhoE(n);
-        n.set_filhoD(beta);
-        n.set_pai(sucessor);
+        if (n.get_FB() == -2){
+            // Rotação Esquerda
 
-        n.set_FB(n.get_FB() + 1 - Math.min(sucessor.get_FB(), 0));
-        sucessor.set_FB(sucessor.get_FB() + 1 + Math.max(n.get_FB(), 0));
+            Node sucessor = filhoD.get_filhoE();
+
+            filhoD.set_pai(oldPai);
+            if (isRoot(n)){
+                raiz = filhoD;
+            }
+
+            filhoD.set_filhoE(n);
+            n.set_filhoD(sucessor);
+            n.set_pai(filhoD);
+
+            n.set_FB(n.get_FB() + 1 - Math.min(filhoD.get_FB(), 0));
+            filhoD.set_FB(filhoD.get_FB() + 1 + Math.max(n.get_FB(), 0));
+        }
 
     }
 
