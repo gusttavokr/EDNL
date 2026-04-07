@@ -52,11 +52,18 @@ public class ArvoreAVL extends ArvorePesquisa {
 
                 if (p.get_FB() < -1){
                     desbalanceado = p;
+                    break;
                 }
 
                 p = p.get_pai();
             }
         }
+
+
+//        if (converterInt(n.get_element()) == 6){
+//            System.out.println("Deu certo");
+//            return;
+//        }
 
         if (desbalanceado != null){
             rotacao(desbalanceado);
@@ -65,18 +72,21 @@ public class ArvoreAVL extends ArvorePesquisa {
 
     public void rotacao(Node n){
 
-        System.out.println("Rotacionando: " + n.get_element() + " [" + n.get_FB() + "]");
         Node filhoD = n.get_filhoD();
         Node filhoE = n.get_filhoE();
 
         Node oldPai = n.get_pai();
 
         if (n.get_FB() == 2){
+
             // Rotação Direita
             Node antecessor = filhoE.get_filhoD();
 
             filhoE.set_pai(oldPai);
 
+            if (oldPai != null){
+                oldPai.set_filhoD(filhoE);
+            }
             if (isRoot(n)){
                 raiz = filhoE;
             }
@@ -95,7 +105,9 @@ public class ArvoreAVL extends ArvorePesquisa {
             Node sucessor = filhoD.get_filhoE();
 
             filhoD.set_pai(oldPai);
-            if (isRoot(n)){
+            if (oldPai != null) {
+                oldPai.set_filhoD(filhoD);
+            } else {
                 raiz = filhoD;
             }
 
@@ -118,7 +130,6 @@ public class ArvoreAVL extends ArvorePesquisa {
         int linha = depth(n);
         int coluna = colunaAtual[0]++;
         matriz[linha][coluna] = n.get_element().toString() + " [" + n.get_FB() + "]";
-
         if (hasRight(n)) {
             inOrder(rightChild(n), matriz, colunaAtual);
         }
