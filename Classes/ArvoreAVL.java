@@ -18,6 +18,8 @@ public class ArvoreAVL extends ArvorePesquisa {
         Node n = new Node(o);
         n.set_pai(pai);
 
+        // Atualizando ponteiro + FB
+
         if (comparar(o, pai.get_element()) < 0) {
             pai.set_filhoE(n);
             atualizarFB(n, pai);
@@ -26,55 +28,6 @@ public class ArvoreAVL extends ArvorePesquisa {
             pai.set_filhoD(n);
             atualizarFB(n, pai);
         }
-
-        // if (comparar(o, pai.get_element()) < 0){
-        //     pai.set_filhoE(n);
-
-        //     // Atualizar Fator de Balanceamento
-        //     Node temp = pai;
-        //     while (temp.get_FB() < 2){
-        //         int fb = temp.get_FB() + 1;
-        //         temp.set_FB(fb);
-                
-
-        //         if (isRoot(temp)){
-        //             break;
-        //         }
-
-        //         if (temp.get_FB() == 1 || temp.get_FB() == -1) {
-        //             temp = temp.get_pai();
-        //         }
-
-        //         else if (temp.get_FB() == 2 || temp.get_FB() == -2){
-        //             System.out.println("A árvore ta desbalanceada nessa porra");
-        //             break;
-        //         }
-        //     }
-        // }
-        // else if (comparar(o, pai.get_element()) > 0){
-        //     pai.set_filhoD(n);
-            
-        //     // Atualizar Fator de Balanceamento
-        //     Node temp = pai;
-        //     while (temp.get_FB() > 2){
-        //         int fb = temp.get_FB() - 1;
-        //         temp.set_FB(fb);
-
-
-        //         if (isRoot(temp) || temp.get_FB() == 0){
-        //             break;
-        //         }
-
-        //         if (temp.get_FB() == 1 || temp.get_FB() == -1) {
-        //             temp = temp.get_pai();
-        //         }
-
-        //         else if (temp.get_FB() == 2 || temp.get_FB() == -2){
-        //             System.out.println("A árvore ta desbalanceada nessa porra");
-        //             break;
-        //         }
-        //     }
-        // }
 
         tamanho++;
         return n;
