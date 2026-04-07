@@ -26,14 +26,24 @@ public class TesteArvoreAVL {
 //        arvore.printArvore();
 
 
-        // Desbalanceada pra direita
-         ArvoreAVL arvore = new ArvoreAVL(1);
+        // Desbalanceada simples pra esquerda
+//         ArvoreAVL arvore = new ArvoreAVL(1);
+//
+//         System.out.println("Inserindo o: 2");
+//         arvore.insercaoAVL(2);
+//         arvore.printArvore();
+//         System.out.println("Inserindo o: 3");
+//         arvore.insercaoAVL(3);
+//         arvore.printArvore();
+
+        // Desbalanceada simples pra direita
+         ArvoreAVL arvore = new ArvoreAVL(3);
 
          System.out.println("Inserindo o: 2");
          arvore.insercaoAVL(2);
          arvore.printArvore();
-         System.out.println("Inserindo o: 3");
-         arvore.insercaoAVL(3);
+         System.out.println("Inserindo o: 1");
+         arvore.insercaoAVL(1);
          arvore.printArvore();
 
 //        ArvoreAVL arvore = new ArvoreAVL(10);
