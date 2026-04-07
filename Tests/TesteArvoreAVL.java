@@ -6,20 +6,24 @@ public class TesteArvoreAVL {
     public static void main(String[] args) {
         System.out.println("Testes para a Arvore AVL");
 
-//        ArvoreAVL arvore = new ArvoreAVL(3);
-//
-//
-//        System.out.println("Inserindo o: 2");
-//        arvore.insercaoAVL(2);
-//        arvore.printArvore();
-//
-//        System.out.println("Inserindo o: 1");
-//        arvore.insercaoAVL(1);
-//        arvore.printArvore();
-//
-//        System.out.println("Inserindo o: 5");
-//        arvore.insercaoAVL(5);
-//        arvore.printArvore();
+        ArvoreAVL arvore = new ArvoreAVL(3);
+
+
+        System.out.println("Inserindo o: 2");
+        arvore.insercaoAVL(2);
+        arvore.printArvore();
+
+        System.out.println("Inserindo o: 1");
+        arvore.insercaoAVL(1);
+        arvore.printArvore();
+
+        System.out.println("Inserindo o: 5");
+        arvore.insercaoAVL(5);
+        arvore.printArvore();
+
+        System.out.println("Inserindo o: 6");
+        arvore.insercaoAVL(6);
+        arvore.printArvore();
 //
 //        System.out.println("Inserindo o: 6");
 //        arvore.insercaoAVL(6);
@@ -37,14 +41,14 @@ public class TesteArvoreAVL {
 //         arvore.printArvore();
 
         // Desbalanceada simples pra direita
-         ArvoreAVL arvore = new ArvoreAVL(3);
-
-         System.out.println("Inserindo o: 2");
-         arvore.insercaoAVL(2);
-         arvore.printArvore();
-         System.out.println("Inserindo o: 1");
-         arvore.insercaoAVL(1);
-         arvore.printArvore();
+//         ArvoreAVL arvore = new ArvoreAVL(3);
+//
+//         System.out.println("Inserindo o: 2");
+//         arvore.insercaoAVL(2);
+//         arvore.printArvore();
+//         System.out.println("Inserindo o: 1");
+//         arvore.insercaoAVL(1);
+//         arvore.printArvore();
 
 //        ArvoreAVL arvore = new ArvoreAVL(10);
 //
