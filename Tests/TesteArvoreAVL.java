@@ -7,9 +7,18 @@ public class TesteArvoreAVL {
     public static void main(String[] args) {
         System.out.println("Testes para a Arvore AVL");
         
-        // ArvoreAVL arvore = new ArvoreAVL(10);
-        // arvore.insercaoAVL(5);
-        // arvore.insercaoAVL(15);
+         ArvoreAVL arvore = new ArvoreAVL(10);
+         arvore.insercaoAVL(5);
+         arvore.insercaoAVL(15);
+         arvore.insercaoAVL(2);
+         arvore.insercaoAVL(8);
+         arvore.insercaoAVL(22);
+         arvore.insercaoAVL(25);
+         arvore.printArvore();
+
+         System.out.println("Removendo o 5");
+         arvore.remover(5);
+         arvore.printArvore();
         // arvore.insercaoAVL(2);
         // arvore.insercaoAVL(8);
         // arvore.insercaoAVL(22);
