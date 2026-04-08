@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.Scanner;
 
+import Exceptions.ArvoreVazia;
 import Exceptions.PosicaoInvalida;
 
 public class ArvoreAVL extends ArvorePesquisa {
@@ -66,69 +67,75 @@ public class ArvoreAVL extends ArvorePesquisa {
 
     public void rotacao(Node n){
 
-        Node filhoD = n.get_filhoD();
+        if (n.get_FB() >= 2){
+            rotacaoSimplesDireita(n);
+        }
+
+        if (n.get_FB() <= -2) {
+            rotacaoSimplesEsquerda(n);
+        }
+    }
+
+    public void rotacaoSimplesDireita(Node n){
         Node filhoE = n.get_filhoE();
         Node oldPai = n.get_pai();
 
-        if (n.get_FB() >= 2){
+        Node antecessor = filhoE.get_filhoD();
 
-            // Rotação Direita
-            Node antecessor = filhoE.get_filhoD();
+        filhoE.set_pai(oldPai);
 
-            filhoE.set_pai(oldPai);
-
-            if (oldPai != null){
-                if (oldPai.get_filhoE() == n) {
-                    oldPai.set_filhoE(filhoE);
-                } else{
-                    oldPai.set_filhoD(filhoE);
-                }
-            } else if (isRoot(n)){
-                raiz = filhoE;
+        if (oldPai != null){
+            if (oldPai.get_filhoE() == n) {
+                oldPai.set_filhoE(filhoE);
+            } else{
+                oldPai.set_filhoD(filhoE);
             }
-
-            filhoE.set_filhoD(n);
-            n.set_filhoE(antecessor);
-
-            if (antecessor != null) {
-                antecessor.set_pai(n);   
-            }
-
-            n.set_pai(filhoE);
-
-            n.set_FB(n.get_FB() - 1 - Math.max(filhoE.get_FB(), 0));
-            filhoE.set_FB(filhoE.get_FB() - 1 + Math.min(n.get_FB(), 0));
+        } else if (isRoot(n)){
+            raiz = filhoE;
         }
 
-        if (n.get_FB() <= -2){
-            // Rotação Esquerda
+        filhoE.set_filhoD(n);
+        n.set_filhoE(antecessor);
 
-            Node sucessor = filhoD.get_filhoE();
-
-            filhoD.set_pai(oldPai);
-            if (oldPai != null) {
-                if (oldPai.get_filhoD() == n) {
-                    oldPai.set_filhoD(filhoD);
-                } else {
-                    oldPai.set_filhoE(filhoD);
-                }
-            } else if (isRoot(n)){
-                raiz = filhoD;
-            }
-
-            filhoD.set_filhoE(n);
-            n.set_filhoD(sucessor);
-
-            if (sucessor != null) {
-                sucessor.set_pai(n);   
-            }
-            
-            n.set_pai(filhoD);
-
-            n.set_FB(n.get_FB() + 1 - Math.min(filhoD.get_FB(), 0));
-            filhoD.set_FB(filhoD.get_FB() + 1 + Math.max(n.get_FB(), 0));
+        if (antecessor != null) {
+            antecessor.set_pai(n);
         }
 
+        n.set_pai(filhoE);
+
+        n.set_FB(n.get_FB() - 1 - Math.max(filhoE.get_FB(), 0));
+        filhoE.set_FB(filhoE.get_FB() - 1 + Math.min(n.get_FB(), 0));
+    }
+
+    public void rotacaoSimplesEsquerda(Node n){
+        // Rotação Esquerda
+        Node filhoD = n.get_filhoD();
+        Node oldPai = n.get_pai();
+
+        Node sucessor = filhoD.get_filhoE();
+
+        filhoD.set_pai(oldPai);
+        if (oldPai != null) {
+            if (oldPai.get_filhoD() == n) {
+                oldPai.set_filhoD(filhoD);
+            } else {
+                oldPai.set_filhoE(filhoD);
+            }
+        } else if (isRoot(n)){
+            raiz = filhoD;
+        }
+
+        filhoD.set_filhoE(n);
+        n.set_filhoD(sucessor);
+
+        if (sucessor != null) {
+            sucessor.set_pai(n);
+        }
+
+        n.set_pai(filhoD);
+
+        n.set_FB(n.get_FB() + 1 - Math.min(filhoD.get_FB(), 0));
+        filhoD.set_FB(filhoD.get_FB() + 1 + Math.max(n.get_FB(), 0));
     }
 
     public void inOrder(Node n, String[][] matriz, int colunaAtual[]){
@@ -195,22 +202,47 @@ public class ArvoreAVL extends ArvorePesquisa {
         return 0;
     }
 
-    public static void main(String[] args) {
-
-        System.out.println("Testes para a Arvore AVL");
-
+    static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Insira para criar a árvore: ");
-        int raiz = scanner.nextInt();
-        
-        ArvoreAVL arvore = new ArvoreAVL(raiz);
-        
-        while (true) {
-            arvore.printArvore();
-            System.out.print("Insira o próximo elemento: ");
-            int elemento = scanner.nextInt();
-            arvore.insercaoAVL(elemento);
-        }
 
+        while (true) {
+            System.out.println("");
+            System.out.println("Testes para a Arvore AVL");
+            System.out.print("Insira um número para criar a árvore: ");
+            String entradaRaiz = scanner.next();
+
+            if (entradaRaiz.equalsIgnoreCase("R")) {
+                System.out.println("Reiniciando...");
+                continue;
+            }
+
+            int raiz;
+            try {
+                raiz = Integer.parseInt(entradaRaiz);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Tente novamente.");
+                continue;
+            }
+
+            ArvoreAVL arvore = new ArvoreAVL(raiz);
+
+            while (true) {
+                arvore.printArvore();
+                System.out.print("Insira o próximo elemento: ");
+                String entrada = scanner.next();
+
+                if (entrada.equalsIgnoreCase("R")) {
+                    System.out.println("Reiniciando");
+                    break;
+                }
+
+                try {
+                    int elemento = Integer.parseInt(entrada);
+                    arvore.insercaoAVL(elemento);
+                } catch (NumberFormatException e) {
+                    System.out.println("Entrada inválida. Tente novamente.");
+                }
+            }
+        }
     }
 }
