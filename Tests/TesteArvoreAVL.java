@@ -1,43 +1,55 @@
 package Tests;
 
 import Classes.ArvoreAVL;
-import Classes.Node;
+// import Classes.Node;
 
 public class TesteArvoreAVL {
     public static void main(String[] args) {
         System.out.println("Testes para a Arvore AVL");
+        
+        // ArvoreAVL arvore = new ArvoreAVL(10);
+        // arvore.insercaoAVL(5);
+        // arvore.insercaoAVL(15);
+        // arvore.insercaoAVL(2);
+        // arvore.insercaoAVL(8);
+        // arvore.insercaoAVL(22);
+        // arvore.printArvore();
+        
+        // // Inserindo 25
+        // System.out.println("Inserindo o 25");
+        // arvore.insercaoAVL(25);
+        // arvore.printArvore();
+        // ArvoreAVL arvore = new ArvoreAVL(3);
 
-        ArvoreAVL arvore = new ArvoreAVL(3);
 
+        // System.out.println("Inserindo o: 2");
+        // arvore.insercaoAVL(2);
+        // arvore.printArvore();
 
-        System.out.println("Inserindo o: 2");
-        arvore.insercaoAVL(2);
-        arvore.printArvore();
+        // System.out.println("Inserindo o: 1");
+        // arvore.insercaoAVL(1);
+        // arvore.printArvore();
 
-        System.out.println("Inserindo o: 1");
-        arvore.insercaoAVL(1);
-        arvore.printArvore();
+        // System.out.println("Inserindo o: 5");
+        // arvore.insercaoAVL(5);
+        // arvore.printArvore();
 
-        System.out.println("Inserindo o: 5");
-        arvore.insercaoAVL(5);
-        arvore.printArvore();
+        // System.out.println("Inserindo o: 6");
+        // arvore.insercaoAVL(6);
+        // arvore.printArvore();
 
-        System.out.println("Inserindo o: 6");
-        arvore.insercaoAVL(6);
-        arvore.printArvore();
+        // System.out.println("Inserindo o: 7");
+        // arvore.insercaoAVL(7);
+        // arvore.printArvore();
 
-        System.out.println("Inserindo o: 7");
-        arvore.insercaoAVL(7);
-        arvore.printArvore();
+        // Node raiz = arvore.root();
 
-        Node raiz = arvore.root();
+        // Node cinco = arvore.busca(5, raiz);
+        // Node tres = arvore.busca(3, raiz);
 
-        Node cinco = arvore.busca(5, raiz);
-        Node tres = arvore.busca(3, raiz);
+        // System.out.println("O filho esquerdo de: " + cinco.get_element() + " é: " + (cinco.get_filhoE()).get_element());
 
-        System.out.println("O filho esquerdo de: " + cinco.get_element() + " é: " + (cinco.get_filhoE()).get_element());
-
-        System.out.println("O pai de 3 é " + (tres.get_pai()).get_element());
+        // System.out.println("O pai de 3 é " + (tres.get_pai()).get_element());
 //
 //        System.out.println("Inserindo o: 6");
 //        arvore.insercaoAVL(6);
