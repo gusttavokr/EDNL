@@ -202,6 +202,83 @@ public class ArvoreAVL extends ArvorePesquisa {
         return 0;
     }
 
+    public Node remover(Object o){
+        if (isEmpty()){
+            throw new ArvoreVazia("A árvore está vazia");
+        }
+
+        Node removido = busca(o, raiz);
+
+        if (removido.get_element() != o){
+            throw new PosicaoInvalida("Esse elemento não está na árvore");
+        }
+
+        if (isRoot(removido)){
+            raiz = null;
+            tamanho --;
+            return removido;
+        } else{
+            Node pai = removido.get_pai();
+
+            if (comparar(o, pai.get_element()) < 0) {
+                pai.set_filhoE(null);
+                removido.set_pai(null);
+                atualizarFBRemocao(removido, pai);
+
+                Node filhoD = removido.get_filhoD();
+                Node filhoE = removido.get_filhoE();
+                filhoD.set_pai(pai);
+                pai.set_filhoE(filhoD);
+
+                filhoE.set_pai(filhoD);
+                filhoD.set_filhoE(filhoE);
+
+            }
+            else if (comparar(o, pai.get_element()) > 0) {
+                pai.set_filhoD(null);
+                removido.set_pai(null);
+                atualizarFBRemocao(removido, pai);
+
+                Node filhoD = removido.get_filhoD();
+                Node filhoE = removido.get_filhoE();
+                filhoE.set_pai(pai);
+                pai.set_filhoD(filhoE);
+
+                filhoD.set_pai(filhoE);
+                filhoE.set_filhoE(filhoD);
+            }
+        }
+
+        return removido;
+    }
+
+    public void atualizarFBRemocao(Node n, Node p){
+
+        Node desbalanceado = null;
+
+        while (p != null) {
+            if (comparar(n.get_element(), p.get_element()) < 0) {
+                p.set_FB(p.get_FB()-1);
+            } else if (comparar(n.get_element(), p.get_element()) > 0) {
+                p.set_FB(p.get_FB()+1);
+            }
+
+
+
+            if (p.get_FB() > 1 || p.get_FB() < -1){
+                desbalanceado = p;
+                break;
+            }
+
+            p = p.get_pai();
+        }
+
+
+        if (desbalanceado != null){
+            rotacao(desbalanceado);
+        }
+    }
+
     static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
