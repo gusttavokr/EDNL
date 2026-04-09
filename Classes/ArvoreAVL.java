@@ -67,12 +67,26 @@ public class ArvoreAVL extends ArvorePesquisa {
 
     public void rotacao(Node n){
 
-        if (n.get_FB() >= 2){
-            rotacaoSimplesDireita(n);
-        }
-
-        if (n.get_FB() <= -2) {
-            rotacaoSimplesEsquerda(n);
+        if (n.get_FB() >= 2) {
+            if (hasLeft(n)) {
+                Node filhoE = n.get_filhoE();
+                if (filhoE.get_FB() >= 0) {
+                    rotacaoSimplesDireita(n);
+                } else {
+                    rotacaoSimplesEsquerda(filhoE);
+                    rotacaoSimplesDireita(n);
+                }
+            }
+        } else if (n.get_FB() <= -2) {
+            if (hasRight(n)){
+                Node filhoD = n.get_filhoD();
+                if (filhoD.get_FB() <= 0){
+                    rotacaoSimplesEsquerda(n);
+                } else{
+                    rotacaoSimplesDireita(filhoD);
+                    rotacaoSimplesEsquerda(n);
+                }
+            }
         }
     }
 
