@@ -239,6 +239,10 @@ public class ArvoreAVL extends ArvorePesquisa {
                 removido.set_pai(null);
                 atualizarFBRemocao(removido, pai);
 
+                if (isExternal(removido)){
+                    return removido;
+                }
+
                 Node filhoD = removido.get_filhoD();
                 Node filhoE = removido.get_filhoE();
                 filhoD.set_pai(pai);
@@ -252,6 +256,10 @@ public class ArvoreAVL extends ArvorePesquisa {
                 pai.set_filhoD(null);
                 removido.set_pai(null);
                 atualizarFBRemocao(removido, pai);
+
+                if (isExternal(removido)){
+                    return removido;
+                }
 
                 Node filhoD = removido.get_filhoD();
                 Node filhoE = removido.get_filhoE();
@@ -297,41 +305,68 @@ public class ArvoreAVL extends ArvorePesquisa {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("");
-            System.out.println("Testes para a Arvore AVL");
-            System.out.print("Insira um número para criar a árvore: ");
+            System.out.println("\n=== Árvore AVL ===");
+            System.out.print("Insira um número para criar a árvore raiz: ");
             String entradaRaiz = scanner.next();
 
-            if (entradaRaiz.equalsIgnoreCase("R")) {
-                System.out.println("Reiniciando...");
-                continue;
-            }
 
-            int raiz;
+
+            int raizVal;
             try {
-                raiz = Integer.parseInt(entradaRaiz);
+                raizVal = Integer.parseInt(entradaRaiz);
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 continue;
             }
 
-            ArvoreAVL arvore = new ArvoreAVL(raiz);
+            ArvoreAVL arvore = new ArvoreAVL(raizVal);
 
             while (true) {
                 arvore.printArvore();
-                System.out.print("Insira o próximo elemento: ");
-                String entrada = scanner.next();
+                System.out.println("\nO que deseja fazer?");
+                System.out.println("  1 - Inserir elemento");
+                System.out.println("  2 - Remover elemento");
+                System.out.println("  R - Reiniciar árvore");
+                System.out.print("Opção: ");
+                String opcao = scanner.next();
 
-                if (entrada.equalsIgnoreCase("R")) {
-                    System.out.println("Reiniciando");
+                if (opcao.equalsIgnoreCase("R")) {
+                    System.out.println("Reiniciando...");
                     break;
                 }
 
-                try {
-                    int elemento = Integer.parseInt(entrada);
-                    arvore.insercaoAVL(elemento);
-                } catch (NumberFormatException e) {
-                    System.out.println("Entrada inválida. Tente novamente.");
+                switch (opcao) {
+                    case "1":
+                        System.out.print("Elemento para inserir: ");
+                        String entradaInsercao = scanner.next();
+                        try {
+                            int elemento = Integer.parseInt(entradaInsercao);
+                            arvore.insercaoAVL(elemento);
+                            System.out.println("Elemento " + elemento + " inserido.");
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida.");
+                        } catch (PosicaoInvalida e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        }
+                        break;
+
+                    case "2":
+                        System.out.print("Elemento para remover: ");
+                        String entradaRemocao = scanner.next();
+                        try {
+                            int elemento = Integer.parseInt(entradaRemocao);
+                            arvore.remover(elemento);
+                            System.out.println("Elemento " + elemento + " removido.");
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida.");
+                        } catch (ArvoreVazia | PosicaoInvalida e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        }
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida. Digite 1, 2 ou R.");
+                        break;
                 }
             }
         }
