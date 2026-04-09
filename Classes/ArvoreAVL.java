@@ -233,42 +233,8 @@ public class ArvoreAVL extends ArvorePesquisa {
             return removido;
         } else{
             Node pai = removido.get_pai();
-
-            if (comparar(o, pai.get_element()) < 0) {
-                pai.set_filhoE(null);
-                removido.set_pai(null);
-                atualizarFBRemocao(removido, pai);
-
-                if (isExternal(removido)){
-                    return removido;
-                }
-
-                Node filhoD = removido.get_filhoD();
-                Node filhoE = removido.get_filhoE();
-                filhoD.set_pai(pai);
-                pai.set_filhoE(filhoD);
-
-                filhoE.set_pai(filhoD);
-                filhoD.set_filhoE(filhoE);
-
-            }
-            else if (comparar(o, pai.get_element()) > 0) {
-                pai.set_filhoD(null);
-                removido.set_pai(null);
-                atualizarFBRemocao(removido, pai);
-
-                if (isExternal(removido)){
-                    return removido;
-                }
-
-                Node filhoD = removido.get_filhoD();
-                Node filhoE = removido.get_filhoE();
-                filhoE.set_pai(pai);
-                pai.set_filhoD(filhoE);
-
-                filhoD.set_pai(filhoE);
-                filhoE.set_filhoE(filhoD);
-            }
+            remove(removido);
+            atualizarFBRemocao(removido, pai);
         }
 
         return removido;
@@ -301,7 +267,7 @@ public class ArvoreAVL extends ArvorePesquisa {
         }
     }
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
