@@ -244,7 +244,7 @@ public class ArvoreAVL extends ArvorePesquisa {
                 remove(removido);
                 Node novoSucessor = antecessor(removido);
                 
-                atualizarFBRemocao(novoSucessor, raiz);
+                atualizarFB(novoSucessor, raiz);
                 return removido;
             }
             Node pai = removido.get_pai();
