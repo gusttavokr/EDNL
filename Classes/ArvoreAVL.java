@@ -233,8 +233,16 @@ public class ArvoreAVL extends ArvorePesquisa {
             return removido;
         } else{
             Node pai = removido.get_pai();
+            Node sucessor;
+
+            if (hasLeft(removido) && !hasRight(removido)){
+                sucessor = removido.get_filhoE();
+            } else{
+                sucessor = removido.get_filhoD();
+            }
             remove(removido);
-            atualizarFBRemocao(removido, pai);
+            System.out.println("Indo atualizar FB com: " + sucessor.get_element());
+            atualizarFBRemocao(pai, sucessor);
         }
 
         return removido;
@@ -251,7 +259,9 @@ public class ArvoreAVL extends ArvorePesquisa {
                 p.set_FB(p.get_FB()+1);
             }
 
-
+            if (p.get_FB() == 0) {
+                break;
+            }
 
             if (p.get_FB() > 1 || p.get_FB() < -1){
                 desbalanceado = p;
