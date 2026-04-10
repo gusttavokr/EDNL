@@ -18,6 +18,7 @@ public class Node{
 
     // Árvore Rubro-Negra
     private Cor cor;
+    private Node irmao;
 
     public Node(Object o){
         this.element = o;
@@ -53,6 +54,9 @@ public class Node{
         return this.cor;
     }
 
+    public Node get_irmao(){
+        return this.irmao;
+    }
 
     // Métodos set
     public void set_element(Object o){
@@ -82,5 +86,9 @@ public class Node{
 
     public void set_Cor(Cor cor){
         this.cor = cor;
+    }
+
+    public void set_irmao(Node n){
+        this.irmao = n;
     }
 }
