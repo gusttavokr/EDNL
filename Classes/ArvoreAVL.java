@@ -240,6 +240,13 @@ public class ArvoreAVL extends ArvorePesquisa {
                 atualizarFBRemocao(novoSucessor, sucessor);
             }
         } else{
+            if (isRoot(removido)) {
+                remove(removido);
+                Node novoSucessor = antecessor(removido);
+                
+                atualizarFBRemocao(novoSucessor, raiz);
+                return removido;
+            }
             Node pai = removido.get_pai();
             Node sucessor;
 
@@ -294,6 +301,20 @@ public class ArvoreAVL extends ArvorePesquisa {
             
         while (!isExternal(n)) {
             n = leftChild(n);
+        }
+
+        return n;
+    }
+    public Node antecessor(Node n){
+
+        if (isExternal(n)) {
+            return n;
+        }
+
+        n = n.get_filhoE();
+            
+        while (!isExternal(n)) {
+            n = rightChild(n);
         }
 
         return n;
