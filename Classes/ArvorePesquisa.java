@@ -157,14 +157,20 @@ public class ArvorePesquisa extends ArvoreBinaria {
         if (hasLeft(n) && hasRight(n)) {
             filho = rightChild(n);
             
-            while (leftChild(filho) != null) {
+            while (isExternal(n)) {
                 filho = leftChild(filho);
             }
             
             Object elementoFilho = filho.get_element();
             replace(n, elementoFilho);
-            remove(filho);
-            
+
+            pai = filho.get_pai();
+            if (filho == pai.get_filhoD()) {
+                pai.set_filhoD(null);
+            } else if (filho == pai.get_filhoE()){
+                pai.set_filhoE(filho);
+            }
+
             return element;
         }
         else if (hasLeft(n) && !hasRight(n)) {

@@ -227,10 +227,18 @@ public class ArvoreAVL extends ArvorePesquisa {
             throw new PosicaoInvalida("Esse elemento não está na árvore");
         }
 
-        if (isRoot(removido)){
-            raiz = null;
-            tamanho --;
-            return removido;
+        if (isExternal(removido)){
+            if (isRoot(removido)) {
+                raiz = null;
+                return removido;
+            }
+            else{
+                remove(removido);
+                Node sucessor = removido.get_pai();
+                Node novoSucessor = sucessor(sucessor);
+                
+                atualizarFBRemocao(novoSucessor, sucessor);
+            }
         } else{
             Node pai = removido.get_pai();
             Node sucessor;
@@ -241,7 +249,6 @@ public class ArvoreAVL extends ArvorePesquisa {
                 sucessor = removido.get_filhoD();
             }
             remove(removido);
-            System.out.println("Indo atualizar FB com: " + sucessor.get_element());
             atualizarFBRemocao(pai, sucessor);
         }
 
@@ -275,6 +282,21 @@ public class ArvoreAVL extends ArvorePesquisa {
         if (desbalanceado != null){
             rotacao(desbalanceado);
         }
+    }
+
+    public Node sucessor(Node n){
+
+        if (isExternal(n)) {
+            return n;
+        }
+
+        n = n.get_filhoD();
+            
+        while (!isExternal(n)) {
+            n = leftChild(n);
+        }
+
+        return n;
     }
 
     public static void main(String[] args) {
