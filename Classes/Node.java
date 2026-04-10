@@ -5,17 +5,25 @@ import java.util.List;
 public class Node{
     private Object element;
     private Node pai;
+
+    // Árvore Genérica
+    private List<Node> filhos;
+
+    // Árvore Binária + Pesquisa
     private Node filhoE;
     private Node filhoD;
 
+    // Árvore AVL
     private int FB;
 
-    private List<Node> filhos;
+    // Árvore Rubro-Negra
+    private Cor cor;
 
     public Node(Object o){
         this.element = o;
         this.filhos = new ArrayList<>();
         this.FB = 0;
+        this.cor = Cor.NEGRO;
     }
 
     // Métodos get
@@ -40,6 +48,10 @@ public class Node{
     }
 
     public int get_FB(){ return FB; }
+
+    public Cor get_Cor(){
+        return this.cor;
+    }
 
 
     // Métodos set
@@ -67,4 +79,8 @@ public class Node{
     }
 
     public void set_FB(int i){ this.FB = i; }
+
+    public void set_Cor(Cor cor){
+        this.cor = cor;
+    }
 }
