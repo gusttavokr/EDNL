@@ -29,14 +29,14 @@ public class ArvorePesquisa extends ArvoreBinaria {
         return n;
     }
 
-    private int comparar(Object o, Object p) {
+    public int comparar(Object o, Object p) {
         int oInt = converterInt(o);
         int pInt = converterInt(p);
 
         return Integer.compare(oInt, pInt);
     }
 
-    private int converterInt(Object p) {
+    public int converterInt(Object p) {
 
         if (p instanceof Integer) {
             return (Integer) p;
