@@ -52,22 +52,27 @@ public class ArvoreRN extends ArvorePesquisa{
             n.set_irmao(leftChild(pai));
         }
 
+        // Caso 1
+        if (cor_pai == Cor.NEGRO){
+            n.set_Cor(Cor.RUBRO);
+            return;
+        }
+
         Node avo = pai.get_pai();
         Cor cor_avo = avo.get_Cor();
 
         Node tio = pai.get_irmao();
         Cor cor_tio = tio.get_Cor();
 
-
-        // Caso 1
-        if (cor_pai == Cor.NEGRO){
-            n.set_Cor(Cor.RUBRO);
-        }
         // Caso 2
-        else if (cor_pai == Cor.RUBRO && cor_avo == Cor.NEGRO && cor_tio == Cor.RUBRO)  {
-            avo.set_Cor(Cor.RUBRO);
+        if (cor_pai == Cor.RUBRO && cor_avo == Cor.NEGRO && cor_tio == Cor.RUBRO)  {
             tio.set_Cor(Cor.NEGRO);
             pai.set_Cor(Cor.NEGRO);
+            if (!isRoot(avo)) {
+                avo.set_Cor(Cor.RUBRO);
+                return;
+            }
+            atualizarCor(n);            
         }
     }
 
@@ -79,7 +84,7 @@ public class ArvoreRN extends ArvorePesquisa{
 
         int linha = depth(n);
         int coluna = colunaAtual[0]++;
-        matriz[linha][coluna] = n.get_element().toString() + " [" + n.get_Cor() + "]";
+        matriz[linha][coluna] = n.get_element().toString() + " [" + n.get_Cor().toString() + "]";
         if (hasRight(n)) {
             inOrder(rightChild(n), matriz, colunaAtual);
         }
@@ -114,7 +119,7 @@ public class ArvoreRN extends ArvorePesquisa{
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n=== Árvore AVL ===");
+            System.out.println("\n=== Árvore Rubro-Negra ===");
             System.out.print("Insira um número para criar a árvore raiz: ");
             String entradaRaiz = scanner.next();
 
