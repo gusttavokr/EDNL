@@ -103,8 +103,9 @@ public class ArvoreRN extends ArvorePesquisa{
 
         if (pai == rightChild(avo) && n == rightChild(pai)) {
             RotacaoSimplesEsquerda(avo);
+            pai.set_Cor(Cor.NEGRO);
+            avo.set_Cor(Cor.RUBRO);
         }
-        
     }
 
     public void RotacaoSimplesEsquerda(Node n){
@@ -113,7 +114,7 @@ public class ArvoreRN extends ArvorePesquisa{
         Node filhoD = n.get_filhoD();
         Node oldPai = n.get_pai();
         Node sucessor = filhoD.get_filhoE();
-
+        
         filhoD.set_pai(oldPai);
         if (oldPai != null) {
             if (oldPai.get_filhoD() == n) {
@@ -124,17 +125,15 @@ public class ArvoreRN extends ArvorePesquisa{
         } else if (isRoot(n)){
             raiz = filhoD;
         }
-
+        
         filhoD.set_filhoE(n);
         n.set_filhoD(sucessor);
-
+        
         if (sucessor != null) {
             sucessor.set_pai(n);
         }
-
-        n.set_pai(filhoD);
         
-
+        n.set_pai(filhoD);
     }
 
     public void inOrder(Node n, String[][] matriz, int colunaAtual[]){
