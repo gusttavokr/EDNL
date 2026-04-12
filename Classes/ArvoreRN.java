@@ -20,6 +20,16 @@ public class ArvoreRN extends ArvorePesquisa{
         return n.get_Cor();
     }
 
+    public Node getIrmao(Node n) {
+        Node pai = n.get_pai();
+
+        if (n == pai.get_filhoE()) {
+            return pai.get_filhoD();
+        } else {
+            return pai.get_filhoE();
+        }
+    }
+
 
     public Node insert(Object o){
 
@@ -33,67 +43,56 @@ public class ArvoreRN extends ArvorePesquisa{
         // Inserção
 
         Node n = new Node(o);
+        n.set_Cor(Cor.RUBRO);
         n.set_pai(pai);
 
 
         if (comparar(o, pai.get_element()) < 0){
             // Esquerda
             pai.set_filhoE(n);
-            if (hasRight(pai)) {
-                // Atualizando ponteiro dos irmãos
-                n.set_irmao(rightChild(pai));
-                rightChild(pai).set_irmao(n);
-            }       
-            atualizarCor(n);
-            
-        } else if (comparar(o, pai.get_element()) > 0){
+        } else{
             // Direita
-            pai.set_filhoD(n);
-            if (hasLeft(pai)) {
-                // Atualizando ponteiro dos irmãos
-                n.set_irmao(leftChild(pai));
-                leftChild(pai).set_irmao(n);
-            }
-            atualizarCor(n);
+            pai.set_filhoD(n);   
         }
+        atualizarCor(n);
 
+        
+        raiz.set_Cor(Cor.NEGRO);
         tamanho++;
-
         return n;
     }
 
     public void atualizarCor(Node n){
-        if (isExternal(n)) {
-            n.set_Cor(Cor.RUBRO);
+
+        if (isRoot(n)) {
+            n.set_Cor(Cor.NEGRO);
         }
 
         Node pai = n.get_pai();
-        Node tio = pai.get_irmao();
-        Node avo = pai.get_pai();
         
-        // Caso 1 + Caso 2
+        // Se o pai for NEGRO, nem faz nada
         if (cor(pai) == Cor.RUBRO) {
+            Node avo = pai.get_pai();
+            Node tio;
+
+            if (pai == leftChild(avo)) {
+                tio = rightChild(avo);
+            } else{
+                tio = leftChild(avo);
+            }
+
+            // Se o Tio For Rubro
             if (cor(tio) == Cor.RUBRO) {
-                
-                if (!isRoot(avo)) {
-                    avo.set_Cor(Cor.RUBRO);
-                }
-                
-                if (cor(tio) == Cor.NEGRO) {
-                    rotacao(n);
-                }
-                
                 pai.set_Cor(Cor.NEGRO);
                 tio.set_Cor(Cor.NEGRO);
-                
-                if (cor(avo.get_pai()) == Cor.RUBRO) {
-                    atualizarCor(avo);
-                    return;
-                }
-            }
-            if (tio.get_Cor() == Cor.NEGRO) {
+                avo.set_Cor(Cor.RUBRO);
+                atualizarCor(avo);
+            } else {
+                // Se o Tio For Negro, precisa de rotação e colorir
                 rotacao(n);
             }
+
+            raiz.set_Cor(Cor.NEGRO);
         }
     }
 
@@ -104,6 +103,23 @@ public class ArvoreRN extends ArvorePesquisa{
         if (pai == rightChild(avo) && n == rightChild(pai)) {
             RotacaoSimplesEsquerda(avo);
             pai.set_Cor(Cor.NEGRO);
+            avo.set_Cor(Cor.RUBRO);
+        }
+        else if (pai == leftChild(avo) && n == leftChild(pai)) {
+            RotacaoSimplesDireita(avo);
+            pai.set_Cor(Cor.NEGRO);
+            avo.set_Cor(Cor.RUBRO);
+        }
+        else if (pai == rightChild(avo) && n == leftChild(pai)) {
+            RotacaoSimplesDireita(pai);
+            RotacaoSimplesEsquerda(avo);
+            n.set_Cor(Cor.NEGRO);
+            avo.set_Cor(Cor.RUBRO);
+        }
+        else if (pai == leftChild(avo) && n == rightChild(pai)) {
+            RotacaoSimplesEsquerda(pai);
+            RotacaoSimplesDireita(avo);
+            n.set_Cor(Cor.NEGRO);
             avo.set_Cor(Cor.RUBRO);
         }
     }
@@ -134,6 +150,33 @@ public class ArvoreRN extends ArvorePesquisa{
         }
         
         n.set_pai(filhoD);
+    }
+    public void RotacaoSimplesDireita(Node n){
+
+        // Rotação Esquerda
+        Node filhoE = n.get_filhoE();
+        Node oldPai = n.get_pai();
+        Node sucessor = filhoE.get_filhoD();
+        
+        filhoE.set_pai(oldPai);
+        if (oldPai != null) {
+            if (oldPai.get_filhoE() == n) {
+                oldPai.set_filhoE(filhoE);
+            } else {
+                oldPai.set_filhoD(filhoE);
+            }
+        } else if (isRoot(n)){
+            raiz = filhoE;
+        }
+        
+        filhoE.set_filhoD(n);
+        n.set_filhoE(sucessor);
+        
+        if (sucessor != null) {
+            sucessor.set_pai(n);
+        }
+        
+        n.set_pai(filhoE);
     }
 
     public void inOrder(Node n, String[][] matriz, int colunaAtual[]){
