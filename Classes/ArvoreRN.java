@@ -13,6 +13,27 @@ public class ArvoreRN extends ArvorePesquisa{
         super(o);
     }
 
+    public Node busca(Object o, Node n){
+
+        if (comparar(o, n.get_element()) < 0) {
+            if (hasLeft(n)) {
+                return busca(o, leftChild(n));
+            }
+        }
+        
+        else if ((comparar(o, n.get_element())) == 0){
+            return n;
+        }
+
+        else if (comparar(o, n.get_element()) > 0) {
+            if (hasRight(n)) {
+                return busca(o, rightChild(n));
+            }
+        }
+        
+        return n;
+    }
+
     public Cor cor(Node n){
         if (n == null) {
             return Cor.NEGRO;
