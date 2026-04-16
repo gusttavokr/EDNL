@@ -13,6 +13,31 @@ public class ArvoreRN extends ArvorePesquisa{
         super(o);
     }
 
+    public int comparar(Object o, Object p) {
+        int oInt = converterInt(o);
+        int pInt = converterInt(p);
+
+        return Integer.compare(oInt, pInt);
+    }
+
+    public int converterInt(Object p) {
+
+        if (p instanceof Integer) {
+            return (Integer) p;
+        }
+        if (p instanceof Float) {
+            return Math.round((Float) p);
+        }
+        if (p instanceof String) {
+            return Integer.parseInt((String) p);
+        }
+        if (p instanceof Boolean) {
+            return ((Boolean) p) ? 1 : 0;
+        }
+        
+        return 0;
+    }
+
     public Node busca(Object o, Node n){
 
         if (comparar(o, n.get_element()) < 0) {
