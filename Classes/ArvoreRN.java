@@ -239,28 +239,22 @@ public class ArvoreRN extends ArvorePesquisa{
 
     public Object remocao(Object o){
 
+        Node removido = busca(o, raiz);
+
+        // Verificações básicas
         if (isEmpty()) {
             throw new ArvoreVazia("A árvore está vazia.");
         }
-
-        Node removido = busca(o, raiz);
-
+        
         if (removido.get_element() != o) {
             throw new PosicaoInvalida("O elemento não está na árvore.");
         }
 
         Node sucessor = sucessor(removido);
-        Cor corSucessor = cor(sucessor);
-
-        // Remoção de Árvore de Pesquisa
-        remove(removido);
-
-        // atualizar cor
-        if (corSucessor == Cor.NEGRO) {
-            // Duplo Negro
-            removido.set_Cor(corSucessor);
-        }
         
+        replace(removido, sucessor.get_element());
+
+        atualizarCor(removido);
         return o;
     }
 
