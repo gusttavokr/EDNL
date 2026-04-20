@@ -66,15 +66,15 @@ public class ArvoreRN extends ArvorePesquisa{
         return n.get_Cor();
     }
 
-    public Node getIrmao(Node n) {
-        Node pai = n.get_pai();
+    // public Node getIrmao(Node n) {
+    //     Node pai = n.get_pai();
 
-        if (n == pai.get_filhoE()) {
-            return pai.get_filhoD();
-        } else {
-            return pai.get_filhoE();
-        }
-    }
+    //     if (n == pai.get_filhoE()) {
+    //         return pai.get_filhoD();
+    //     } else {
+    //         return pai.get_filhoE();
+    //     }
+    // }
 
 
     public Node insert(Object o){
@@ -248,9 +248,19 @@ public class ArvoreRN extends ArvorePesquisa{
         if (removido.get_element() != o) {
             throw new PosicaoInvalida("O elemento não está na árvore.");
         }
-        
+
+        Node sucessor = sucessor(removido);
+        Cor corSucessor = cor(sucessor);
+
         // Remoção de Árvore de Pesquisa
-        remove(removido);        
+        remove(removido);
+
+        // atualizar cor
+        if (corSucessor == Cor.NEGRO) {
+            // Duplo Negro
+            removido.set_Cor(corSucessor);
+        }
+        
         return o;
     }
 
