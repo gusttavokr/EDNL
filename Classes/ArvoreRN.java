@@ -85,13 +85,10 @@ public class ArvoreRN extends ArvorePesquisa{
             throw new PosicaoInvalida("Elemento já presente");
         }
 
-
         // Inserção
-
         Node n = new Node(o);
         n.set_Cor(Cor.RUBRO);
         n.set_pai(pai);
-
 
         if (comparar(o, pai.get_element()) < 0){
             // Esquerda
@@ -116,7 +113,7 @@ public class ArvoreRN extends ArvorePesquisa{
 
         Node pai = n.get_pai();
         
-        // Se o pai for NEGRO, nem faz nada
+        // Se o pai for RUBRO, se não for nem faz nada
         if (cor(pai) == Cor.RUBRO) {
             Node avo = pai.get_pai();
             Node tio;
@@ -225,6 +222,38 @@ public class ArvoreRN extends ArvorePesquisa{
         n.set_pai(filhoE);
     }
 
+    public Node sucessor(Node n){
+
+        if (isExternal(n)) {
+            return n;
+        }
+
+        n = rightChild(n);
+            
+        while (!isExternal(n)) {
+            n = leftChild(n);
+        }
+
+        return n;
+    }
+
+    public Object remocao(Object o){
+
+        if (isEmpty()) {
+            throw new ArvoreVazia("A árvore está vazia.");
+        }
+
+        Node removido = busca(o, raiz);
+
+        if (removido.get_element() != o) {
+            throw new PosicaoInvalida("O elemento não está na árvore.");
+        }
+        
+        // Remoção de Árvore de Pesquisa
+        remove(removido);        
+        return o;
+    }
+
     public void inOrder(Node n, String[][] matriz, int colunaAtual[]){
 
         if (hasLeft(n)) {
@@ -323,18 +352,18 @@ public class ArvoreRN extends ArvorePesquisa{
 
                     case "2":
                         System.out.println("Remoção em construção");
-//                        System.out.print("Elemento para remover: ");
-//                        String entradaRemocao = scanner.next();
-//                        try {
-//                            int elemento = Integer.parseInt(entradaRemocao);
-//                            arvore.remover(elemento);
-//                            System.out.println("Elemento " + elemento + " removido.");
-//                        } catch (NumberFormatException e) {
-//                            System.out.println("Entrada inválida.");
-//                        } catch (ArvoreVazia | PosicaoInvalida e) {
-//                            System.out.println("Erro: " + e.getMessage());
-//                        }
-//                        break;
+                       System.out.print("Elemento para remover: ");
+                       String entradaRemocao = scanner.next();
+                       try {
+                           int elemento = Integer.parseInt(entradaRemocao);
+                           arvore.remocao(elemento);
+                           System.out.println("Elemento " + elemento + " removido.");
+                       } catch (NumberFormatException e) {
+                           System.out.println("Entrada inválida.");
+                       } catch (ArvoreVazia | PosicaoInvalida e) {
+                           System.out.println("Erro: " + e.getMessage());
+                       }
+                       break;
 
                     default:
                         System.out.println("Opção inválida. Digite 1, 2 ou R.");
