@@ -18,7 +18,6 @@ public class Node{
 
     // Árvore Rubro-Negra
     private Cor cor;
-    private boolean DuploNegro;
     // private Node irmao;
 
     public Node(Object o){
@@ -26,7 +25,6 @@ public class Node{
         this.filhos = new ArrayList<>();
         this.FB = 0;
         this.cor = Cor.NEGRO;
-        this.DuploNegro = false;
     }
 
     // Métodos get
@@ -54,10 +52,6 @@ public class Node{
 
     public Cor get_Cor(){
         return this.cor;
-    }
-
-    public boolean get_DuploNegro(){
-        return this.DuploNegro;
     }
 
     // public Node get_irmao(){
@@ -92,10 +86,6 @@ public class Node{
 
     public void set_Cor(Cor cor){
         this.cor = cor;
-    }
-
-    public void set_DuploNegro(boolean DuploNegro){
-        this.DuploNegro = DuploNegro;
     }
 
     // public void set_irmao(Node n){
