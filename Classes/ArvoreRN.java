@@ -228,13 +228,13 @@ public class ArvoreRN extends ArvorePesquisa{
             return n;
         }
 
-        n = rightChild(n);
+        Node filho = rightChild(n);
             
-        while (!isExternal(n)) {
-            n = leftChild(n);
+        while (!isExternal(filho)) {
+            filho = leftChild(filho);
         }
 
-        return n;
+        return filho;
     }
 
     public Object remocao(Object o){
@@ -251,11 +251,176 @@ public class ArvoreRN extends ArvorePesquisa{
         }
 
         Node sucessor = sucessor(removido);
-        
-        replace(removido, sucessor.get_element());
 
-        atualizarCor(removido);
+        Node pai = parent(removido);
+        Node irmao = irmao(removido);
+
+        if (cor(irmao) == Cor.RUBRO) {
+            // Se irmão for RUBRO
+            if (filhoEsquerdo(removido)) {
+                RotacaoSimplesEsquerda(irmao);
+            } else{
+                RotacaoSimplesDireita(irmao);
+            }
+            Cor corPai = cor(pai);
+            Cor corIrmao = cor(irmao);
+
+            pai.set_Cor(corIrmao);
+            irmao.set_Cor(corPai);
+
+            remocao(o);
+        } else{
+            // Se irmão for Preto, olhe o sobrinho longe.
+            Node sobrinhoLonge = sobrinhoLonge(removido);
+            if (cor(sobrinhoLonge) == Cor.RUBRO) {
+                if (filhoEsquerdo(removido)) {
+                    RotacaoSimplesEsquerda(pai);
+                } else{
+                    RotacaoSimplesDireita(pai);
+                }
+
+                Cor corPai = cor(pai);
+
+                pai.set_Cor(Cor.NEGRO);
+                irmao.set_Cor(corPai);
+                sobrinhoLonge.set_Cor(Cor.NEGRO);
+
+                // Caso terminal
+                removendo(removido, sucessor);
+                return o;
+            } else {
+                // Se irmão negro, sobrinho longe negro, sobrinho perto rubro
+                Node sobrinhoPerto = sobrinhoPerto(removido);
+                if (cor(sobrinhoPerto) == Cor.RUBRO) {
+                    if (filhoEsquerdo(sobrinhoPerto)) {
+                        RotacaoSimplesDireita(irmao);
+                    } else{
+                        RotacaoSimplesEsquerda(irmao);
+                    }
+    
+                    Cor corIrmao = cor(irmao);
+                    Cor corSobrinhoPerto = cor(sobrinhoPerto);
+    
+                    sobrinhoPerto.set_Cor(corIrmao);
+                    irmao.set_Cor(corSobrinhoPerto);
+    
+                    remocao(o);
+                } else{
+                    // Olhe o pai
+                    if (cor(pai) == Cor.RUBRO) {
+                        Cor corIrmao = cor(irmao);
+                        Cor corPai = cor(pai);
+        
+                        irmao.set_Cor(corPai);
+                        pai.set_Cor(corIrmao);
+        
+                        // Caso terminal
+                        removendo(removido, sucessor);
+                        return o;
+                    }
+                    else{
+                        irmao.set_Cor(Cor.RUBRO);
+                        remocao(pai.get_element());
+                    }
+                }
+            }
+        }
+        
+        removendo(removido, sucessor);
+
+        tamanho--;
         return o;
+    }
+
+    public void removendo(Node r, Node s){
+        Node pai = parent(r);
+        if (r == s) {
+            if (filhoEsquerdo(r)) {
+                pai.set_filhoE(null);
+            } else{
+                pai.set_filhoD(null);
+            }
+        } else{
+            replace(r, s);
+        }
+    }
+
+    public Object replace(Node n, Object v){
+        n.set_element(v);
+        return v;
+
+    }
+
+    public Node irmao(Node n){
+        if (isRoot(n)) {
+            throw new PosicaoInvalida("Raiz não tem irmão");
+        }
+
+        Node pai = parent(n);
+
+        if (leftChild(pai) == n) {
+            if (hasRight(pai)) {
+                return rightChild(pai);
+            }
+        }
+
+        if (rightChild(pai) == n) {
+            if (hasLeft(pai)) {
+                return leftChild(pai);
+            }
+        }
+
+        throw new PosicaoInvalida("Não tem irmão.");
+    }
+
+    public boolean filhoEsquerdo(Node n){
+        if (isRoot(n)) {
+            throw new PosicaoInvalida("Raiz não é filho.");
+        }
+
+        Node pai = parent(n);
+
+        if (leftChild(pai) == n) {
+            return true;
+        }
+
+        if (rightChild(pai) == n) {
+            return false;
+        }
+
+        throw new PosicaoInvalida("Não sou filho.");
+    }
+
+    public Node sobrinhoPerto(Node n){
+        if (isRoot(n)) {
+            throw new PosicaoInvalida("Raiz não tem irmao.");
+        }
+
+        Node irmao = irmao(n);
+
+        if (filhoEsquerdo(n) == true) {
+            return leftChild(irmao);
+        } else if (filhoEsquerdo(n) == false){
+            return rightChild(irmao);
+        }
+
+        throw new PosicaoInvalida("Não tem sobrinho");
+    }
+
+    public Node sobrinhoLonge(Node n){
+        if (isRoot(n)) {
+            throw new PosicaoInvalida("Raiz não tem irmao.");
+        }
+
+        Node irmao = irmao(n);
+
+        if (filhoEsquerdo(n) == true) {
+            return rightChild(irmao);
+        } else if (filhoEsquerdo(n) == false){
+            return leftChild(irmao);
+        }
+
+        throw new PosicaoInvalida("Não tem sobrinho");
     }
 
     public void inOrder(Node n, String[][] matriz, int colunaAtual[]){
