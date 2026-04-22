@@ -109,6 +109,7 @@ public class ArvoreRN extends ArvorePesquisa{
 
         if (isRoot(n)) {
             n.set_Cor(Cor.NEGRO);
+            raiz = n;
         }
 
         Node pai = n.get_pai();
@@ -252,12 +253,27 @@ public class ArvoreRN extends ArvorePesquisa{
 
         Node sucessor = sucessor(removido);
 
-        Node pai = parent(removido);
-        Node irmao = irmao(removido);
+        if (cor(sucessor) == Cor.NEGRO) {
+            rebalanceando(sucessor);
+        }
 
+        removendo(removido, sucessor);
+        return o;
+    }
+
+    public void rebalanceando(Node n){
+        if (n == raiz || cor(n) == Cor.RUBRO) {
+            n.set_Cor(Cor.NEGRO);
+            return;
+        }
+
+        Node sucessor = sucessor(n);
+        Node pai = parent(n);
+        Node irmao = irmao(n);
+        
         if (cor(irmao) == Cor.RUBRO) {
             // Se irmão for RUBRO
-            if (filhoEsquerdo(removido)) {
+            if (filhoEsquerdo(n)) {
                 RotacaoSimplesEsquerda(irmao);
             } else{
                 RotacaoSimplesDireita(irmao);
@@ -266,70 +282,60 @@ public class ArvoreRN extends ArvorePesquisa{
             Cor corIrmao = cor(irmao);
 
             pai.set_Cor(corIrmao);
-            irmao.set_Cor(corPai);
-
-            remocao(o);
+            irmao.set_Cor(corPai);            
         } else{
             // Se irmão for Preto, olhe o sobrinho longe.
-            Node sobrinhoLonge = sobrinhoLonge(removido);
+            Node sobrinhoLonge = sobrinhoLonge(n);
             if (cor(sobrinhoLonge) == Cor.RUBRO) {
-                if (filhoEsquerdo(removido)) {
+                if (filhoEsquerdo(n)) {
                     RotacaoSimplesEsquerda(pai);
                 } else{
                     RotacaoSimplesDireita(pai);
                 }
-
+                
                 Cor corPai = cor(pai);
-
+                
                 pai.set_Cor(Cor.NEGRO);
                 irmao.set_Cor(corPai);
                 sobrinhoLonge.set_Cor(Cor.NEGRO);
-
+                
                 // Caso terminal
-                removendo(removido, sucessor);
-                return o;
+                return;
             } else {
                 // Se irmão negro, sobrinho longe negro, sobrinho perto rubro
-                Node sobrinhoPerto = sobrinhoPerto(removido);
+                Node sobrinhoPerto = sobrinhoPerto(n);
                 if (cor(sobrinhoPerto) == Cor.RUBRO) {
                     if (filhoEsquerdo(sobrinhoPerto)) {
                         RotacaoSimplesDireita(irmao);
                     } else{
                         RotacaoSimplesEsquerda(irmao);
                     }
-    
+                    
                     Cor corIrmao = cor(irmao);
                     Cor corSobrinhoPerto = cor(sobrinhoPerto);
-    
+                    
                     sobrinhoPerto.set_Cor(corIrmao);
                     irmao.set_Cor(corSobrinhoPerto);
-    
-                    remocao(o);
+                    
+                    return;
                 } else{
                     // Olhe o pai
                     if (cor(pai) == Cor.RUBRO) {
                         Cor corIrmao = cor(irmao);
                         Cor corPai = cor(pai);
-        
+                        
                         irmao.set_Cor(corPai);
                         pai.set_Cor(corIrmao);
-        
+                        
                         // Caso terminal
-                        removendo(removido, sucessor);
-                        return o;
-                    }
-                    else{
-                        irmao.set_Cor(Cor.RUBRO);
-                        remocao(pai.get_element());
+                        return;
                     }
                 }
             }
         }
-        
-        removendo(removido, sucessor);
 
-        tamanho--;
-        return o;
+        irmao.set_Cor(Cor.RUBRO);
+        rebalanceando(pai);
     }
 
     public void removendo(Node r, Node s){
@@ -341,8 +347,19 @@ public class ArvoreRN extends ArvorePesquisa{
                 pai.set_filhoD(null);
             }
         } else{
-            replace(r, s);
+            replace(r, s.get_element());
+
+            Node paiSucessor = parent(s);
+
+            if (rightChild(paiSucessor) == s) {
+                paiSucessor.set_filhoD(null);
+            } else{
+                paiSucessor.set_filhoE(null);
+            }
+            
         }
+
+        tamanho--;
     }
 
     public Object replace(Node n, Object v){
