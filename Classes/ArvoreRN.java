@@ -229,13 +229,17 @@ public class ArvoreRN extends ArvorePesquisa{
             return n;
         }
 
-        Node filho = rightChild(n);
+        Node sucessor;
+        if (hasRight(n)) {
+            sucessor = rightChild(n);
+        } 
+        sucessor = leftChild(n);
             
-        while (!isExternal(filho)) {
-            filho = leftChild(filho);
+        while (!isExternal(sucessor)) {
+            sucessor = leftChild(sucessor);
         }
 
-        return filho;
+        return sucessor;
     }
 
     public Object remocao(Object o){
