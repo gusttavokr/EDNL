@@ -13,4 +13,20 @@ public class NodeB {
         this.filhos = new NodeB[2 * t];
         this.numChaves = 0;
     }
+
+    public Object[] get_chaves(){
+        return this.chaves;
+    }
+
+    public int get_grau(){
+        return this.t;
+    }
+
+    public NodeB[] get_filhos(){
+        return this.filhos;
+    }
+
+    public int get_numChaves(){
+        return this.numChaves;
+    }
 }
