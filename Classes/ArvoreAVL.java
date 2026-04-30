@@ -226,11 +226,6 @@ public class ArvoreAVL extends ArvorePesquisa {
                 remove(removido);
 
                 return removido;
-                // Node sucessor = removido.get_pai();
-                // Node novoSucessor = sucessor(sucessor);
-                
-                // atualizarFBRemocao(novoSucessor, sucessor);
-                // remove(removido);
             }
         } else{
             if (isRoot(removido)) {
