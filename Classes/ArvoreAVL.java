@@ -203,7 +203,7 @@ public class ArvoreAVL extends ArvorePesquisa {
         Node removido = busca(o, raiz);
         Object element = removido.get_element();
         
-        if (element != o){
+        if (comparar(element, o) != 0){
             throw new PosicaoInvalida("Esse elemento não está na árvore");
         }
 
