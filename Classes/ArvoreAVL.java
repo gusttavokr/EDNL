@@ -12,13 +12,18 @@ public class ArvoreAVL extends ArvorePesquisa {
 
     public Node insercaoAVL(Object o){
 
-        // Inserção
+        Node n = new Node(o);
+        if (isEmpty()) {
+            this.raiz = n;
+            tamanho++;
+            return n;
+        }
+
         Node pai = busca(o, raiz);
         if (comparar(o, pai.get_element()) == 0){
             throw new PosicaoInvalida("Elemento já presente");
         }
 
-        Node n = new Node(o);
         n.set_pai(pai);
 
         // Atualizando ponteiro + FB
@@ -210,16 +215,16 @@ public class ArvoreAVL extends ArvorePesquisa {
         if (isExternal(removido)){
             if (isRoot(removido)) {
                 removido = null;
-                raiz = null;
+                this.raiz = null;
                 tamanho--;
                 return removido;
             }
             else{
-                remove(removido);
                 Node sucessor = removido.get_pai();
                 Node novoSucessor = sucessor(sucessor);
                 
                 atualizarFBRemocao(novoSucessor, sucessor);
+                remove(removido);
             }
         } else{
             if (isRoot(removido)) {
