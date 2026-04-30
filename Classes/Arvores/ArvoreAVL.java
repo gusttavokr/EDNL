@@ -268,16 +268,12 @@ public class ArvoreAVL extends ArvorePesquisa {
 
             if (p.get_FB() > 1 || p.get_FB() < -1){
                 desbalanceado = p;
-                break;
+                rotacao(desbalanceado);
             }
 
             p = p.get_pai();
         }
 
-
-        if (desbalanceado != null){
-            rotacao(desbalanceado);
-        }
     }
 
     public Node sucessor(Node n){
