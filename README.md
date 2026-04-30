@@ -27,6 +27,7 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 - [x] **Árvore de Pesquisa (BST)**
 - [x] **Árvore AVL**
 - [ ] **Árvore Rubro-Negra**
+- [ ] **Árvore B**
 
 ---
 Desenvolvido por: [Gustavo Maia](https://github.com/gusttavokr) 🚀
