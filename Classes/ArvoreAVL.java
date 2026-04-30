@@ -20,19 +20,20 @@ public class ArvoreAVL extends ArvorePesquisa {
         }
 
         Node pai = busca(o, raiz);
-        if (comparar(o, pai.get_element()) == 0){
+        Object elemento_pai = pai.get_element();
+        if (comparar(o, elemento_pai) == 0){
             throw new PosicaoInvalida("Elemento já presente");
         }
 
         n.set_pai(pai);
 
         // Atualizando ponteiro + FB
-
-        if (comparar(o, pai.get_element()) < 0) {
+        if (comparar(o, elemento_pai) < 0){
             pai.set_filhoE(n);
             atualizarFB(n, pai);
         }
-        else if (comparar(o, pai.get_element()) > 0) {
+        else if (comparar(o, elemento_pai) > 0) {
+
             pai.set_filhoD(n);
             atualizarFB(n, pai);
         }
@@ -46,9 +47,11 @@ public class ArvoreAVL extends ArvorePesquisa {
         Node desbalanceado = null;
 
         while (p != null) {
-            if (comparar(n.get_element(), p.get_element()) < 0) {
+            Object elementN = n.get_element();
+            Object elementP = p.get_element();
+            if (comparar(elementN, elementP) < 0) {
                 p.set_FB(p.get_FB()+1);
-            } else if (comparar(n.get_element(), p.get_element()) > 0) {
+            } else if (comparar(elementN, elementP) > 0) {
                 p.set_FB(p.get_FB()-1);
             }
 
@@ -216,15 +219,18 @@ public class ArvoreAVL extends ArvorePesquisa {
             if (isRoot(removido)) {
                 removido = null;
                 this.raiz = null;
-                tamanho--;
-                return removido;
             }
             else{
-                Node sucessor = removido.get_pai();
-                Node novoSucessor = sucessor(sucessor);
-                
-                atualizarFBRemocao(novoSucessor, sucessor);
+                Node pai = removido.get_pai();
+                atualizarFBRemocao(removido, pai);
                 remove(removido);
+
+                return removido;
+                // Node sucessor = removido.get_pai();
+                // Node novoSucessor = sucessor(sucessor);
+                
+                // atualizarFBRemocao(novoSucessor, sucessor);
+                // remove(removido);
             }
         } else{
             if (isRoot(removido)) {
@@ -232,7 +238,6 @@ public class ArvoreAVL extends ArvorePesquisa {
                 prox = sucessor(removido);
                 atualizarFBRemocao(prox, raiz);
                 remove(removido);
-                return removido;
             }
             Node pai = removido.get_pai();
             Node sucessor;
