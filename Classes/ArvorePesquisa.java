@@ -175,6 +175,15 @@ public class ArvorePesquisa extends ArvoreBinaria {
         }
         else if (hasLeft(n) && !hasRight(n)) {
             filho = leftChild(n);
+            if (isRoot(n)) {
+                Object elemento_filho = filho.get_element();
+                n.set_element(elemento_filho);
+                n.set_filhoE(null);
+
+                tamanho--;
+                return element;
+            }
+
             if (isRoot(n)){
                 filho.set_pai(null);
                 raiz = filho;
@@ -189,6 +198,16 @@ public class ArvorePesquisa extends ArvoreBinaria {
             filho.set_pai(pai);
         } else if(!hasLeft(n) && hasRight(n)){
             filho = rightChild(n);
+
+            if (isRoot(n)) {
+                Object elemento_filho = filho.get_element();
+                n.set_element(elemento_filho);
+                n.set_filhoD(null);
+
+                tamanho--;
+                return element;
+            }
+
             if (leftChild(pai) == n) {
                 pai.set_filhoE(filho);
             } else if(rightChild(pai) == n){
