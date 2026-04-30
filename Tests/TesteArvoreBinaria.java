@@ -1,7 +1,7 @@
 package Tests;
 
-import Classes.ArvoreBinaria;
 import Classes.Node;
+import Classes.Arvores.ArvoreBinaria;
 
 public class TesteArvoreBinaria {
     public static void main(String[] args) {

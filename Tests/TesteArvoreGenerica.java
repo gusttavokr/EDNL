@@ -1,7 +1,7 @@
 package Tests;
 
-import Classes.ArvoreGenerica;
 import Classes.Node;
+import Classes.Arvores.ArvoreGenerica;
 
 public class TesteArvoreGenerica {
     public static void main(String[] args) {

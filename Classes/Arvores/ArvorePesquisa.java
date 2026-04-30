@@ -1,5 +1,6 @@
-package Classes;
+package Classes.Arvores;
 
+import Classes.Node;
 import Exceptions.ArvoreVazia;
 import Exceptions.PosicaoInvalida;
 

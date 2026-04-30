@@ -1,8 +1,9 @@
-package Classes;
+package Classes.Arvores;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Classes.Node;
 import Exceptions.ArvoreVazia;
 import Exceptions.NodeSemFilho;
 import Interfaces.TAD_ArvoreGenerica;

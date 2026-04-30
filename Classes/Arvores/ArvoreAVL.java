@@ -1,7 +1,8 @@
-package Classes;
+package Classes.Arvores;
 
 import java.util.Scanner;
 
+import Classes.Node;
 import Exceptions.ArvoreVazia;
 import Exceptions.PosicaoInvalida;
 

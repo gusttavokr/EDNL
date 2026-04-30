@@ -1,9 +1,12 @@
-package Classes;
+package Classes.Arvores;
 
 import Exceptions.ArvoreVazia;
 import Exceptions.PosicaoInvalida;
 
 import java.util.Scanner;
+
+import Classes.Cor;
+import Classes.Node;
 
 public class ArvoreRN extends ArvorePesquisa{
     public static final String ANSI_RED = "\u001B[38;2;255;0m";
