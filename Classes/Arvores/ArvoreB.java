@@ -1,4 +1,6 @@
-package Classes;
+package Classes.Arvores;
+
+import Classes.NodeB;
 
 public class ArvoreB {
     private NodeB raiz;

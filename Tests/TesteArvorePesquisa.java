@@ -1,7 +1,7 @@
 package Tests;
 
-import Classes.ArvorePesquisa;
 import Classes.Node;
+import Classes.Arvores.ArvorePesquisa;
 
 public class TesteArvorePesquisa {
     public static void main(String[] args) {

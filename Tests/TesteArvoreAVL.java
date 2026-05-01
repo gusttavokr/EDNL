@@ -1,11 +1,12 @@
 package Tests;
 
-import Classes.ArvoreAVL;
 import Exceptions.ArvoreVazia;
 import Exceptions.PosicaoInvalida;
 
 import java.util.Scanner;
 // import Classes.Node;
+
+import Classes.Arvores.ArvoreAVL;
 
 public class TesteArvoreAVL {
     ArvoreAVL arvore = new ArvoreAVL(getClass());

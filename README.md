@@ -10,9 +10,9 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 
 ```text
 ├── src/
-│   ├── interfaces/     # Contratos e assinaturas dos métodos das estruturas
 │   ├── classes/        # Implementações concretas das árvores e nós
 │   └── exceptions/     # Exceções personalizadas para operações inválidas
+│   ├── interfaces/     # Contratos e assinaturas dos métodos das estruturas
 │   └── tests/          # Scripts de teste para os métodos das estruturas
 └── README.md
 ```
@@ -25,8 +25,9 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 - [x] **Árvore Genérica**
 - [x] **Árvore Binária**
 - [x] **Árvore de Pesquisa (BST)**
-- [ ] **Árvore AVL**
+- [x] **Árvore AVL**
 - [ ] **Árvore Rubro-Negra**
+- [ ] **Árvore B**
 
 ---
 Desenvolvido por: [Gustavo Maia](https://github.com/gusttavokr) 🚀

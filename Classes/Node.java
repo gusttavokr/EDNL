@@ -17,7 +17,7 @@ public class Node{
     private int FB;
 
     // Árvore Rubro-Negra
-    private Cor cor;
+    private Classes.Cor cor;
     // private Node irmao;
 
     public Node(Object o){
