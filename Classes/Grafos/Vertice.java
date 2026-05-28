@@ -1,6 +1,7 @@
 package Classes.Grafos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Vertice{
     private Object identificador; //v1, v2
