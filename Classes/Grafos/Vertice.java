@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vertice{
-    private Object identificador; //v1, v2
+    private int id; //v1, v2
+    private Object element;
+
     private List<Aresta> arestas;
 
-    public Vertice(Object id){
-        this.identificador = id;
+    public Vertice(int indice, Object x){
+        this.id = indice;
+        this.element = x;
         this.arestas = new ArrayList<>();
     }
 }

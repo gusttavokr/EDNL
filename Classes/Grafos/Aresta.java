@@ -1,13 +1,12 @@
 package Classes.Grafos;
 
 public class Aresta{
-    private Object element;
-    
     private Vertice verticeInicio;
     private Vertice verticeFim;
-    private Vertice[] vertices;
+    private Object element;
+    private Boolean direcionada;
 
-    private Boolean direcionado;
+    private Vertice[] vertices;
 
     public Aresta(Object elemento, Vertice vertice1, Vertice vertice2){
         this.element = elemento;
@@ -16,6 +15,8 @@ public class Aresta{
 
         Vertice[] verticesList = new Vertice[]{vertice1, vertice2};
         this.vertices = verticesList;
+        
+        direcionada = false;
     }
 
 }
