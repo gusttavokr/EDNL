@@ -1,6 +1,6 @@
 # 🌳 Estruturas de Dados Não Lineares
 
-Este repositório é dedicado ao estudo, implementação e análise de **Estruturas de Dados Não Lineares**. O foco principal é entender a hierarquia, as regras de balanceamento e a eficiência de algoritmos aplicados a Árvores.
+Este repositório é dedicado ao estudo, implementação e análise de **Estruturas de Dados Não Lineares**. O foco principal é a implementação das estruturas para estudo, e entendimento complexidade, eficiência e uso em software.
 
 ---
 
@@ -10,7 +10,7 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 
 ```text
 ├── src/
-│   ├── classes/        # Implementações concretas das árvores e nós
+│   ├── classes/        # Implementações das estruturas
 │   └── exceptions/     # Exceções personalizadas para operações inválidas
 │   ├── interfaces/     # Contratos e assinaturas dos métodos das estruturas
 │   └── tests/          # Scripts de teste para os métodos das estruturas
@@ -21,13 +21,16 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 
 ## ✅ Checklist de Implementação
 
-### 🌲 [Árvores](https://github.com/gusttavokr/ednl/tree/arvore)
+### 🌲 Árvores
 - [x] **Árvore Genérica**
 - [x] **Árvore Binária**
 - [x] **Árvore de Pesquisa (BST)**
 - [x] **Árvore AVL**
-- [ ] **Árvore Rubro-Negra**
+- [x] **Árvore Rubro-Negra**
 - [ ] **Árvore B**
+
+### 🕸️ Grafos
+- [] **Grafo Simples**
 
 ---
 Desenvolvido por: [Gustavo Maia](https://github.com/gusttavokr) 🚀
