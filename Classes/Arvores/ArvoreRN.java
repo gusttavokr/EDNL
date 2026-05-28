@@ -274,7 +274,7 @@ public class ArvoreRN extends ArvorePesquisa{
             return;
         }
 
-        Node sucessor = sucessor(n);
+        // Node sucessor = sucessor(n);
         Node pai = parent(n);
         Node irmao = irmao(n);
         
