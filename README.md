@@ -29,8 +29,8 @@ O projeto está organizado seguindo boas práticas de POO, separando contratos, 
 - [x] **Árvore Rubro-Negra**
 - [ ] **Árvore B**
 
-### 🕸️ Grafos
-- [] **Grafo Simples**
+### 🪧 Grafos
+- [ ] **Grafo Simples**
 
 ---
 Desenvolvido por: [Gustavo Maia](https://github.com/gusttavokr) 🚀
