@@ -23,4 +23,40 @@ public class Aresta{
         direcionada = false;
     }
 
+    // GETTERS
+    public Vertice getVerticeInicio(){
+        return this.verticeInicio;
+    }
+    public Vertice getVerticeFim(){
+        return this.verticeFim;
+    }
+    public Object getElement(){
+        return this.element;
+    }
+    public boolean getDirecionada(){
+        return this.direcionada;
+    }
+    public List<Vertice> getVertices(){
+        return this.vertices;
+    }
+
+    //SETTERS
+    public void setVerticeInicio(Vertice v){
+        this.verticeInicio = v;
+    }
+    public void setVerticeFim(Vertice v){
+        this.verticeFim = v;
+    }
+    public void setElement(Object o){
+        this.element = o;
+    }
+    public void setDirecionada(boolean x){
+        this.direcionada = x;
+    }
+    public void addVertice(Vertice v){
+        this.vertices.add(v);
+    }
+    public void removeVertice(Vertice v){
+        this.vertices.remove(v);
+    }
 }
