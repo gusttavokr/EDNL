@@ -9,8 +9,7 @@ public class Vertice{
 
     private List<Aresta> arestas;
 
-    public Vertice(int indice, Object x){
-        this.id = indice;
+    public Vertice(Object x){
         this.element = x;
         this.arestas = new ArrayList<>();
     }
