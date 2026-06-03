@@ -1,7 +1,6 @@
 package Classes.Grafos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Aresta{
     private Vertice verticeInicio;
@@ -9,7 +8,7 @@ public class Aresta{
     private Object element;
     private Boolean direcionada;
 
-    private List<Vertice> vertices;
+    private ArrayList<Vertice> vertices;
 
     public Aresta(Object elemento, Vertice vertice1, Vertice vertice2){
         this.element = elemento;
@@ -36,7 +35,7 @@ public class Aresta{
     public boolean getDirecionada(){
         return this.direcionada;
     }
-    public List<Vertice> getVertices(){
+    public ArrayList<Vertice> getVertices(){
         return this.vertices;
     }
 
