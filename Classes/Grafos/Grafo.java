@@ -1,6 +1,7 @@
 package Classes.Grafos;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import Exceptions.GrafoErro;
 import Interfaces.TAD_Grafo;
@@ -57,5 +58,18 @@ public class Grafo implements TAD_Grafo{
     public int grau(Vertice v){
         ArrayList<Aresta> arestas = arestasIncidentes(v);
         return arestas.size();
+    }
+
+    public Vertice inserirVertice(Object o){
+        
+        for (Vertice v : this.vertices){
+            if (Objects.equals(v, o)) {
+                throw new GrafoErro("Esse elemento já está presente no Grafo");
+            }
+        }
+        
+        Vertice vertice = new Vertice(o);
+        this.vertices.add(vertice);
+        return vertice;
     }
 }
