@@ -72,4 +72,15 @@ public class Grafo implements TAD_Grafo{
         this.vertices.add(vertice);
         return vertice;
     }
+
+    public Vertice removerVertice(Vertice v){
+        for (Vertice v1 : this.vertices){
+            if (v1 == v) {
+                this.vertices.remove(v);
+                return v;
+            }
+        }
+
+        throw new GrafoErro("Vértice não encontrado.");
+    }
 }
