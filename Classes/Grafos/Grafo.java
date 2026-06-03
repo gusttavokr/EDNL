@@ -27,10 +27,6 @@ public class Grafo implements TAD_Grafo{
 
     public Vertice oposto(Vertice v, Aresta a){
 
-        // if (a == null || v == null) {
-        //     throw new GrafoErro("Vértice ou Aresta inexistente");
-        // }
-
         Vertice vertice1 = a.getVerticeInicio();
         Vertice vertice2 = a.getVerticeFim();
         
