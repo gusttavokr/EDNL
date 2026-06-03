@@ -11,6 +11,10 @@ public class Grafo implements TAD_Grafo{
         return a.getVertices();
     }
 
+    public ArrayList<Aresta> arestasIncidentes(Vertice v){
+        return v.getArestas();
+    }
+
     public Vertice oposto(Vertice v, Aresta a){
 
         // if (a == null || v == null) {
@@ -31,7 +35,7 @@ public class Grafo implements TAD_Grafo{
 
     public boolean isAdjacente(Vertice v1, Vertice v2){
         
-        ArrayList<Aresta> arestasV1 = v1.getArestas();
+        ArrayList<Aresta> arestasV1 = arestasIncidentes(v1);
 
         for (Aresta aresta : arestasV1){
             if (v2 == oposto(v1, aresta)) {
@@ -41,4 +45,6 @@ public class Grafo implements TAD_Grafo{
 
         return false;
     }
+
+
 }
