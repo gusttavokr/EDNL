@@ -1,13 +1,12 @@
 package Classes.Grafos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Vertice{
     private int id; //v1, v2
     private Object element;
 
-    private List<Aresta> arestas;
+    private ArrayList<Aresta> arestas;
 
     public Vertice(Object x){
         this.element = x;
@@ -21,7 +20,7 @@ public class Vertice{
     public Object element(){
         return this.element;
     }
-    public List<Aresta> getArestas(){
+    public ArrayList<Aresta> getArestas(){
         return this.arestas;
     }
 
