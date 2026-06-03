@@ -28,4 +28,17 @@ public class Grafo implements TAD_Grafo{
 
         throw new GrafoErro("O vértice: " + v + " não está na aresta.");  
     }
+
+    public boolean isAdjacente(Vertice v1, Vertice v2){
+        
+        ArrayList<Aresta> arestasV1 = v1.getArestas();
+
+        for (Aresta aresta : arestasV1){
+            if (v2 == oposto(v1, aresta)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
