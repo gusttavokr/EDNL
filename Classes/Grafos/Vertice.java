@@ -3,7 +3,6 @@ package Classes.Grafos;
 import java.util.ArrayList;
 
 public class Vertice{
-    private int id; //v1, v2
     private Object element;
 
     private ArrayList<Aresta> arestas;
@@ -14,10 +13,8 @@ public class Vertice{
     }
 
     // GETTERS
-    public int getId(){
-        return this.id;
-    }
-    public Object element(){
+    
+    public Object getElement(){
         return this.element;
     }
     public ArrayList<Aresta> getArestas(){
@@ -25,9 +22,7 @@ public class Vertice{
     }
 
     //SETTERS
-    public void setId(int id){
-        this.id = id;
-    }
+    
     public void setElement(Object element){
         this.element = element;
     }
