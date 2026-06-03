@@ -9,48 +9,37 @@ import Classes.Grafos.Vertice;
 public interface TAD_Grafo {
     // Grafo Não direcionado
     
-    // finalVertices(a), retorna um array armazenando os vertices de uma aresta
-    public ArrayList<Vertice> finalVertices(Aresta a);
-
-    // oposto(v, e) retorna o vertice oposto a v
-    public Vertice oposto(Vertice v, Aresta a);
-
-    // éAdjacente(v, w) retorna true se tiverem aresta ligando eles
-    public boolean isAdjacente(Vertice v, Vertice w);
-
-    //substituir(v, x) é um replace, vale para aresta também
-    public Object substituirVertice(Vertice v, Object x);
-    public Object substituirAresta(Aresta a, Object x);
-
-    // Inserção
-    public Vertice inserirVertice(Object o);
-    public Aresta inserirAresta(Vertice v1, Vertice v2, Object o);
-    // inserirVertice(v1, v2, o) pode ter um 4 parametro, se é direcionado ou nao
-
-    // Remoção
+    // ===== MÉTODOS DE VÉRTICE
+    public ArrayList<Vertice> finalVertices(Aresta a);     // Retorna um array armazenando os vertices de uma aresta
+    public ArrayList<Aresta> arestasIncidentes(Vertice v); // quais arestas tem esse vertice
+    public Vertice oposto(Vertice v, Aresta a);            // Retorna o vertice oposto a v
+    public boolean isAdjacente(Vertice v, Vertice w);      // Retorna true se tiverem aresta ligando eles
+    public int grau(Vertice v);                            // Usar arestas incidentes
+    public Vertice inserirVertice(Object o);               // pode ter um 4 parametro, se é direcionado ou nao
     public Vertice removerVertice(Vertice v);
-    public Aresta removerAresta(Aresta a);
+    public Object substituirVertice(Vertice v, Object x);  // é um replace, vale para aresta também
 
-    // arestasIncidentes(v), quais arestas tem esse vertice
-    public ArrayList<Aresta> arestasIncidentes(Vertice v);
-
+    public Iterator<Vertice> vertices();                   // Usar DFs
     
-    // Iteradores de Vertices e arestas - Usar: BFs e DFs
-    public Iterator<Vertice> vertices();
-    public Iterator<Aresta> arestas();
 
-    // Grau de um nó - utilizar arestas incidentes
-    public int grau(Vertice v);
 
-    //  ========================== DIRECIONADO
-    // ehDirecionado(e) 
+
+
+
+    // ===== MÉTODOS DE ARESTA
+    public Object substituirAresta(Aresta a, Object x);
+    public Aresta inserirAresta(Vertice v1, Vertice v2, Object o);
+    public Aresta removerAresta(Aresta a);
+    
+    public Iterator<Aresta> arestas(); // Usar BFs
+    
+
+
+
+
+    // ===== MÉTODOS PARA DIRECIONADO
     public boolean isDirecionado(Aresta a);
-
-    // inserirArestaDirecionada(v1, v2, "X") - A diferença está na operação
-    public Aresta inserirArestaDirecionada(Vertice v1, Vertice v2, Object o, boolean True);
-
-    //grau de entrada - utilizar arestas incidentes
+    public Aresta inserirArestaDirecionada(Vertice v1, Vertice v2, Object o, boolean True); // inserirArestaDirecionada(v1, v2, "X") - A diferença está na operação
     public int grauEntrada(Vertice v);
-    //grau de saida
     public int grauSaída(Vertice v);
 }
