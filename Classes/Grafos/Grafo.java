@@ -54,5 +54,8 @@ public class Grafo implements TAD_Grafo{
         return false;
     }
 
-
+    public int grau(Vertice v){
+        ArrayList<Aresta> arestas = arestasIncidentes(v);
+        return arestas.size();
+    }
 }
