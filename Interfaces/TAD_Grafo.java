@@ -9,13 +9,13 @@ import Classes.Grafos.Vertice;
 public interface TAD_Grafo {
     // Grafo Não direcionado
     
-    // ===== MÉTODOS DE VÉRTICE
     public ArrayList<Vertice> finalVertices(Aresta a);     // Retorna um array armazenando os vertices de uma aresta
     public ArrayList<Aresta> arestasIncidentes(Vertice v); // quais arestas tem esse vertice
     public Vertice oposto(Vertice v, Aresta a);            // Retorna o vertice oposto a v
     public boolean isAdjacente(Vertice v, Vertice w);      // Retorna true se tiverem aresta ligando eles
     public int grau(Vertice v);                            // Usar arestas incidentes
     
+    // ===== MÉTODOS DE VÉRTICE
     public Iterator<Vertice> vertices();                   // Usar DFs
     
     public Vertice inserirVertice(Object o);               // pode ter um 4 parametro, se é direcionado ou nao
