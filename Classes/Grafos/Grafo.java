@@ -7,6 +7,14 @@ import Interfaces.TAD_Grafo;
 
 public class Grafo implements TAD_Grafo{
 
+    public ArrayList<Aresta> arestas;
+    public ArrayList<Vertice> vertices;
+
+    public Grafo(){
+        this.vertices = new ArrayList<>();
+        this.arestas = new ArrayList<>();
+    }
+
     public ArrayList<Vertice> finalVertices(Aresta a){
         return a.getVertices();
     }
