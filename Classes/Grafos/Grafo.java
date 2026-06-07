@@ -125,6 +125,47 @@ public class Grafo implements TAD_Grafo{
         return a;
     }
 
+    public boolean isDirecionado(Aresta a){
+
+        if (a.getDirecionada() == true) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public Aresta inserirArestaDirecionada(Vertice v1, Vertice v2, Object o){
+        Aresta a = inserirAresta(v1, v2, o);
+        a.setDirecionada(true);
+        return a;
+    }
+
+    public int grauEntrada(Vertice v){
+        int count = 0;
+        ArrayList<Aresta> arestas = arestasIncidentes(v);
+
+        for (Aresta a : arestas){
+            if (v == a.getVerticeFim()) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
+
+    public int grauSaida(Vertice v){
+        int count = 0;
+        ArrayList<Aresta> arestas = arestasIncidentes(v);
+
+        for (Aresta a : arestas){
+            if (v == a.getVerticeInicio()) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
+
     // Retorna uma lista de vertices adjacentes ao Vertice v
     public ArrayList<Vertice> verticesAdjacentes(Vertice v){
 
