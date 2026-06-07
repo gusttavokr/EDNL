@@ -61,6 +61,10 @@ public class Grafo implements TAD_Grafo{
         return this.vertices.iterator();
     }
 
+    public Iterator<Aresta> arestas(){
+        return this.arestas.iterator();
+    }
+
     public Vertice inserirVertice(Object o){
 
         Iterator<Vertice> vertices = vertices();
@@ -94,7 +98,7 @@ public class Grafo implements TAD_Grafo{
         v.setElement(x);
         return old;
     }
-    
+
     public Object substituirAresta(Aresta a, Object x){
         Object old = a.getElement();
         a.setElement(x);
@@ -106,6 +110,17 @@ public class Grafo implements TAD_Grafo{
 
         v1.addAresta(a);
         v2.addAresta(a);
+
+        return a;
+    }
+
+    public Aresta removerAresta(Aresta a){
+        ArrayList<Vertice> vertices = finalVertices(a);
+        Vertice v1 = vertices.get(0);
+        Vertice v2 = vertices.get(-1);
+
+        v1.removeAresta(a);
+        v2.removeAresta(a);
 
         return a;
     }
