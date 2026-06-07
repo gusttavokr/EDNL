@@ -19,6 +19,7 @@ public class TesteGrafo {
         Vertice Vertice3 = grafo.inserirVertice(tres);
 
         grafo.inserirAresta(Vertice1, Vertice2, "Aresta1");
+        grafo.inserirAresta(Vertice1, Vertice3, "Aresta2");
 
         grafo.print();
     }
