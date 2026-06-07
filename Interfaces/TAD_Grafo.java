@@ -31,7 +31,7 @@ public interface TAD_Grafo {
     
     // ===== MÉTODOS PARA DIRECIONADO
     public boolean isDirecionado(Aresta a);
-    public Aresta inserirArestaDirecionada(Vertice v1, Vertice v2, Object o, boolean True); // inserirArestaDirecionada(v1, v2, "X") - A diferença está na operação
+    public Aresta inserirArestaDirecionada(Vertice v1, Vertice v2, Object o); // inserirArestaDirecionada(v1, v2, "X") - A diferença está na operação
     public int grauEntrada(Vertice v);
-    public int grauSaída(Vertice v);
+    public int grauSaida(Vertice v);
 }
