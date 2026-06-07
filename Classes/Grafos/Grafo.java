@@ -89,6 +89,18 @@ public class Grafo implements TAD_Grafo{
         throw new GrafoErro("Vértice não encontrado.");
     }
 
+    public Object substituirVertice(Vertice v, Object x){
+        Object old = v.getElement();
+        v.setElement(x);
+        return old;
+    }
+    
+    public Object substituirAresta(Aresta a, Object x){
+        Object old = a.getElement();
+        a.setElement(x);
+        return old;
+    }
+
     public Aresta inserirAresta(Vertice v1, Vertice v2, Object element){
         Aresta a = new Aresta(element, v1, v2);
 
@@ -118,6 +130,7 @@ public class Grafo implements TAD_Grafo{
 
     public void print(){
 
+        // TODO: Atualmente, o print não printa os elementos, imprime os endereços de memória
         for (Vertice v : vertices){
 
             ArrayList<Vertice> verticesAdj = verticesAdjacentes(v);
