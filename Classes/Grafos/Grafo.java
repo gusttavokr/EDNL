@@ -88,4 +88,42 @@ public class Grafo implements TAD_Grafo{
 
         throw new GrafoErro("Vértice não encontrado.");
     }
+
+    public Aresta inserirAresta(Vertice v1, Vertice v2, Object element){
+        Aresta a = new Aresta(element, v1, v2);
+
+        v1.addAresta(a);
+        v2.addAresta(a);
+
+        return a;
+    }
+
+    // Retorna uma lista de vertices adjacentes ao Vertice v
+    public ArrayList<Vertice> verticesAdjacentes(Vertice v){
+
+        ArrayList<Vertice> listaVertices = new ArrayList<>();
+
+        ArrayList<Aresta> arestas = arestasIncidentes(v);
+
+        for (Aresta a : arestas){
+            Vertice oposto = oposto(v, a);
+            listaVertices.add(oposto);
+            // System.out.println(oposto.getElement());
+            
+        }
+
+        return listaVertices;
+
+    }
+
+    public void print(){
+
+        for (Vertice v : vertices){
+
+            ArrayList<Vertice> verticesAdj = verticesAdjacentes(v);
+            
+            System.out.println("[" + v.getElement() + "] = " + verticesAdj.toString());
+            
+        }
+    }
 }
