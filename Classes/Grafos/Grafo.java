@@ -61,6 +61,17 @@ public class Grafo implements TAD_Grafo{
         return this.vertices.iterator();
     }
 
+    public int quantidadeVertices(Iterator<Vertice> vertices){
+
+        int tamanho = 0;
+        while (vertices().hasNext()) {
+            vertices.hasNext();
+            tamanho++;
+        }
+
+        return tamanho;
+    }
+
     public Iterator<Aresta> arestas(){
         return this.arestas.iterator();
     }
@@ -194,5 +205,31 @@ public class Grafo implements TAD_Grafo{
             System.out.println("[" + v.getElement() + "] = " + verticesAdj.toString());
             
         }
+    }
+
+    public void dijkstra(Vertice origem, Vertice destino){
+        
+        ArrayList<Object> distancias = new ArrayList<>();
+        ArrayList<Object> visitados = new ArrayList<>();
+
+        Iterator<Vertice> listaVertices = vertices();
+
+        while (listaVertices.hasNext()) {
+            Vertice v = listaVertices.next();
+            if (v.equals(origem)) {
+                distancias.add(0);
+                visitados.add(true);
+            } else{
+                distancias.add(Integer.MAX_VALUE);
+                visitados.add(false);
+            }
+        }
+
+        ArrayList<Vertice> verticesAdj = verticesAdjacentes(origem);
+        for (Vertice v : verticesAdj){
+            // Object v
+        }
+        // Conta o vertice inicial
+
     }
 }
