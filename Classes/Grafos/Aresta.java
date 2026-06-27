@@ -6,7 +6,7 @@ public class Aresta{
     private Vertice verticeInicio;
     private Vertice verticeFim;
     private Object element;
-    private Boolean direcionada;
+    private boolean direcionada;
 
     private ArrayList<Vertice> vertices;
 

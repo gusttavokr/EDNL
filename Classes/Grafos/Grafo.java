@@ -1,6 +1,7 @@
 package Classes.Grafos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -61,11 +62,13 @@ public class Grafo implements TAD_Grafo{
         return this.vertices.iterator();
     }
 
-    public int quantidadeVertices(Iterator<Vertice> vertices){
+    public int quantidadeVertices(){
+
+        Iterator<Vertice> vertices = vertices();
 
         int tamanho = 0;
-        while (vertices().hasNext()) {
-            vertices.hasNext();
+        while (vertices.hasNext()) {
+            vertices.next();
             tamanho++;
         }
 
@@ -195,6 +198,7 @@ public class Grafo implements TAD_Grafo{
 
     }
 
+    
     public void print(){
 
         // TODO: Atualmente, o print não printa os elementos, imprime os endereços de memória
@@ -206,30 +210,107 @@ public class Grafo implements TAD_Grafo{
             
         }
     }
+    
+    public Aresta nossaAresta(Vertice v1, Vertice v2){
 
-    public void dijkstra(Vertice origem, Vertice destino){
-        
-        ArrayList<Object> distancias = new ArrayList<>();
-        ArrayList<Object> visitados = new ArrayList<>();
+        ArrayList<Aresta> arestas_in = arestasIncidentes(v1);
 
-        Iterator<Vertice> listaVertices = vertices();
-
-        while (listaVertices.hasNext()) {
-            Vertice v = listaVertices.next();
-            if (v.equals(origem)) {
-                distancias.add(0);
-                visitados.add(true);
-            } else{
-                distancias.add(Integer.MAX_VALUE);
-                visitados.add(false);
+        for (Aresta a : arestas_in){
+            if (a.getVerticeInicio() == v2 || a.getVerticeFim() == v2) {
+                return a;   
             }
         }
 
-        ArrayList<Vertice> verticesAdj = verticesAdjacentes(origem);
-        for (Vertice v : verticesAdj){
-            // Object v
-        }
-        // Conta o vertice inicial
+        return null;
+    }
 
+    public void dijkstra(Vertice origem, Vertice destino){
+        
+        Double infinito = Double.POSITIVE_INFINITY;
+        
+        ArrayList<Object> custos_distancias = new ArrayList<>();
+        
+        // PASSO 1 - Início
+        for (Vertice v : this.vertices) {
+            if (v == origem) {
+                custos_distancias.add(0);
+            } else{
+                custos_distancias.add(infinito);
+            }   
+        }
+        
+        ArrayList<Vertice> vertices_adj = verticesAdjacentes(origem);
+        Vertice atual = origem;
+
+        // Ainda existem vertices não processados?
+        while (this.vertices.stream().anyMatch(v -> !v.getProcessado())) {
+            // PASSO 2 - Escolher o vertice 
+            for (Vertice v : vertices_adj){
+                
+                // Custo atual
+                int indice_atual = this.vertices.indexOf(atual);
+                int custo_atual = (int) custos_distancias.get(indice_atual);
+
+                // Pro vizinho
+                Aresta a = nossaAresta(atual, v);
+                int novo_custo = (int) a.getElement();
+
+                // Pro vizinho atualmente
+                int indice_v = this.vertices.indexOf(v);
+                int custo_v_atual = (int) custos_distancias.get(indice_v);
+
+                int soma = custo_atual + novo_custo;
+                Object custo_final = soma; 
+
+                if (soma < custo_v_atual) {
+                    custos_distancias.set(indice_v, custo_final);
+                }
+
+            }
+
+            atual.setProcessado(true);
+            
+            // PASSO 3 - Qual o menor?
+            Object menor_custo = null;
+            
+            for (Vertice v : this.vertices){
+                if (v.getProcessado() == false) {
+                    Integer indice_v = this.vertices.indexOf(v);
+                    
+                    Object custo_v = custos_distancias.get(indice_v);
+                    
+                    if (comparar(custo_v, menor_custo) < 0) {
+                        menor_custo = custo_v;
+                        atual = v;
+                    }
+                }
+            }
+            vertices_adj = verticesAdjacentes(atual);
+        }
+    }
+
+    public int comparar(Object o, Object p) {
+        int oInt = converterInt(o);
+        int pInt = converterInt(p);
+
+        return Integer.compare(oInt, pInt);
+    }
+
+    public int converterInt(Object p) {
+
+        if (p instanceof Integer) {
+            return (Integer) p;
+        }
+        if (p instanceof Float) {
+            return Math.round((Float) p);
+        }
+        if (p instanceof String) {
+            return Integer.parseInt((String) p);
+        }
+        if (p instanceof Boolean) {
+            return ((Boolean) p) ? 1 : 0;
+        }
+        
+        return 0;
     }
 }

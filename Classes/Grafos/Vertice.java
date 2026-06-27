@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 public class Vertice{
     private Object element;
-
+    
     private ArrayList<Aresta> arestas;
+    
+    private boolean processado;
 
     public Vertice(Object x){
         this.element = x;
         this.arestas = new ArrayList<>();
+        this.processado = false;
     }
 
     // GETTERS
@@ -19,6 +22,10 @@ public class Vertice{
     }
     public ArrayList<Aresta> getArestas(){
         return this.arestas;
+    }
+
+    public Boolean getProcessado(){
+        return this.processado;
     }
 
     //SETTERS
@@ -31,6 +38,9 @@ public class Vertice{
     }
     public void removeAresta(Aresta aresta){
         this.arestas.remove(aresta);
+    }
+    public void setProcessado(Boolean x){
+        this.processado = x;
     }
 
 }
