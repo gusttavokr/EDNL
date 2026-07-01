@@ -226,9 +226,11 @@ public class Grafo implements TAD_Grafo{
 
     public void dijkstra(Vertice origem, Vertice destino){
         
-        Double infinito = Double.POSITIVE_INFINITY;
+        Integer infinito = Integer.MAX_VALUE;
         
-        ArrayList<Object> custos_distancias = new ArrayList<>();
+        ArrayList<Integer> custos_distancias = new ArrayList<>();
+
+        ArrayList<Vertice> antecessores = new ArrayList<>();
         
         // PASSO 1 - Início
         for (Vertice v : this.vertices) {
@@ -236,7 +238,9 @@ public class Grafo implements TAD_Grafo{
                 custos_distancias.add(0);
             } else{
                 custos_distancias.add(infinito);
-            }   
+            } 
+            
+            antecessores.add(null);
         }
         
         ArrayList<Vertice> vertices_adj = verticesAdjacentes(origem);
@@ -244,6 +248,11 @@ public class Grafo implements TAD_Grafo{
 
         // Ainda existem vertices não processados?
         while (this.vertices.stream().anyMatch(v -> !v.getProcessado())) {
+
+            if (atual == destino) {
+                break;
+            }
+
             // PASSO 2 - Escolher o vertice 
             for (Vertice v : vertices_adj){
                 
@@ -260,10 +269,11 @@ public class Grafo implements TAD_Grafo{
                 int custo_v_atual = (int) custos_distancias.get(indice_v);
 
                 int soma = custo_atual + novo_custo;
-                Object custo_final = soma; 
 
+                // relaxamento
                 if (soma < custo_v_atual) {
-                    custos_distancias.set(indice_v, custo_final);
+                    custos_distancias.set(indice_v, soma);
+                    antecessores.set(indice_v, atual);
                 }
 
             }
