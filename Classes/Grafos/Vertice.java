@@ -9,6 +9,10 @@ public class Vertice{
     
     private boolean processado;
 
+    // coordenadas para o A*
+    private int x;
+    private int y;
+
     public Vertice(Object x){
         this.element = x;
         this.arestas = new ArrayList<>();
@@ -23,9 +27,14 @@ public class Vertice{
     public ArrayList<Aresta> getArestas(){
         return this.arestas;
     }
-
     public Boolean getProcessado(){
         return this.processado;
+    }
+    public int getX(){
+        return this.x;
+    }
+    public int getY(){
+        return this.y;
     }
 
     //SETTERS
@@ -42,5 +51,10 @@ public class Vertice{
     public void setProcessado(Boolean x){
         this.processado = x;
     }
-
+    public void setCoordenadaX(int x){
+        this.x = x;
+    }
+    public void setCoordenadaY(int y){
+        this.y = y;
+    }
 }
