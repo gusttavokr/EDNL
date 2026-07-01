@@ -1,7 +1,6 @@
 package Classes.Grafos;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -224,81 +223,6 @@ public class Grafo implements TAD_Grafo{
         return null;
     }
 
-    public void dijkstra(Vertice origem, Vertice destino){
-        
-        Integer infinito = Integer.MAX_VALUE;
-        
-        ArrayList<Integer> custos_distancias = new ArrayList<>();
-
-        ArrayList<Vertice> antecessores = new ArrayList<>();
-        
-        // PASSO 1 - Início
-        for (Vertice v : this.vertices) {
-            if (v == origem) {
-                custos_distancias.add(0);
-            } else{
-                custos_distancias.add(infinito);
-            } 
-            
-            antecessores.add(null);
-        }
-        
-        ArrayList<Vertice> vertices_adj = verticesAdjacentes(origem);
-        Vertice atual = origem;
-
-        // Ainda existem vertices não processados?
-        while (this.vertices.stream().anyMatch(v -> !v.getProcessado())) {
-
-            if (atual == destino) {
-                break;
-            }
-
-            // PASSO 2 - Escolher o vertice 
-            for (Vertice v : vertices_adj){
-                
-                // Custo atual
-                int indice_atual = this.vertices.indexOf(atual);
-                int custo_atual = (int) custos_distancias.get(indice_atual);
-
-                // Pro vizinho
-                Aresta a = nossaAresta(atual, v);
-                int novo_custo = (int) a.getElement();
-
-                // Pro vizinho atualmente
-                int indice_v = this.vertices.indexOf(v);
-                int custo_v_atual = (int) custos_distancias.get(indice_v);
-
-                int soma = custo_atual + novo_custo;
-
-                // relaxamento
-                if (soma < custo_v_atual) {
-                    custos_distancias.set(indice_v, soma);
-                    antecessores.set(indice_v, atual);
-                }
-
-            }
-
-            atual.setProcessado(true);
-            
-            // PASSO 3 - Qual o menor?
-            Object menor_custo = null;
-            
-            for (Vertice v : this.vertices){
-                if (v.getProcessado() == false) {
-                    Integer indice_v = this.vertices.indexOf(v);
-                    
-                    Object custo_v = custos_distancias.get(indice_v);
-                    
-                    if (comparar(custo_v, menor_custo) < 0) {
-                        menor_custo = custo_v;
-                        atual = v;
-                    }
-                }
-            }
-            vertices_adj = verticesAdjacentes(atual);
-        }
-    }
-
     public int comparar(Object o, Object p) {
         int oInt = converterInt(o);
         int pInt = converterInt(p);
@@ -322,5 +246,5 @@ public class Grafo implements TAD_Grafo{
         }
         
         return 0;
-    }
+    }  
 }
