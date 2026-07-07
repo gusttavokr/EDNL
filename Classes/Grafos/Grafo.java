@@ -306,23 +306,45 @@ public class Grafo implements TAD_Grafo{
             atual.setProcessado(true);
             
             // PASSO 3 - Qual o menor?
-            int indice_atual = this.vertices.indexOf(atual);
-            int custo_atual = (int) custos_distancias.get(indice_atual);
-            Object menor_custo = custo_atual;
-            
+            Vertice proximo = null;
+            int menor_custo = infinito;
+
             for (Vertice v : this.vertices){
-                if (v.getProcessado() == false) {
-                    Integer indice_v = this.vertices.indexOf(v);
-                    
-                    Object custo_v = custos_distancias.get(indice_v);
-                    
-                    if (comparar(custo_v, menor_custo) < 0) {
+                if (!v.getProcessado()) {
+                    int indice_v = this.vertices.indexOf(v);
+                    int custo_v = (int) custos_distancias.get(indice_v);
+
+                    if (custo_v < menor_custo) {
                         menor_custo = custo_v;
-                        atual = v;
+                        proximo = v;
                     }
                 }
             }
+
+            if(proximo == null) {
+                break;
+            }
+
+            atual = proximo;
             vertices_adj = verticesAdjacentes(atual);
+
+            // int indice_atual = this.vertices.indexOf(atual);
+            // int custo_atual = (int) custos_distancias.get(indice_atual);
+            // Object menor_custo = custo_atual;
+            
+            // for (Vertice v : this.vertices){
+            //     if (v.getProcessado() == false) {
+            //         Integer indice_v = this.vertices.indexOf(v);
+                    
+            //         Object custo_v = custos_distancias.get(indice_v);
+                    
+            //         if (comparar(custo_v, menor_custo) < 0) {
+            //             menor_custo = custo_v;
+            //             atual = v;
+            //         }
+            //     }
+            // }
+            // vertices_adj = verticesAdjacentes(atual);
         }
 
         ArrayList<Vertice> caminho = new ArrayList<>();
